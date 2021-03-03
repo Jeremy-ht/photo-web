@@ -3,15 +3,9 @@
     <el-card class="box-card" shadow="hover">
 
       <!--表格-->
-      <el-table height="375" :data="userList" stripe style="width: 100%; margin-top: 10px" border>
+      <el-table  :data="userList" stripe style="width: 100%; margin-top: 10px" border>
         <el-table-column label="#" type="index" align="center"/>
         <el-table-column label="用户名" prop="uname" align="center"/>
-<!--        <el-table-column label="性别" prop="sex" align="center" >-->
-<!--          <template slot-scope="scope">-->
-<!--            <span v-if="scope.row.sex == 1">男</span>-->
-<!--            <span v-else>女</span>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
 
         <el-table-column label="用户头像" prop="image" align="center">
           <template slot-scope="scope">
@@ -28,29 +22,7 @@
             <span style="margin-left: 10px">{{ scope.row.creatime }}</span>
           </template>
         </el-table-column>
-        <!--        <el-table-column label="登录方式" prop="sex" align="center" width="110px">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            <span v-if="scope.row.loginway == 0">用户名登录</span>-->
-        <!--            <span v-else>手机号登录</span>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
-        <!--        <el-table-column label="用户状态" prop="sex" align="center" width="100px">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            <span v-if="scope.row.state == 1"><el-tag type="success">正常</el-tag></span>-->
-        <!--            <span v-else-if="scope.row.state == 2"><el-tag type="danger">已禁用</el-tag></span>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
-<!--        <el-table-column label="操作" align="center" width="100px">-->
-<!--          <template slot-scope="scope">-->
-<!--            &lt;!&ndash;禁用&ndash;&gt;-->
-<!--            <el-button v-if="scope.row.state == 1" class="admin-add-btn" type="primary" size="mini"-->
-<!--                       @click="delUserBtn(scope.row.id)">禁用-->
-<!--            </el-button>-->
-<!--            &lt;!&ndash; 解禁 &ndash;&gt;-->
-<!--            <el-button v-else-if="scope.row.state == 2" type="info" size="mini" @click="ableUserBtn(scope.row.id)">解禁-->
-<!--            </el-button>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+
 
       </el-table>
 
@@ -74,7 +46,7 @@
       return {
         // 分页查询
         pagenum: 1,
-        pagesize: 8,
+        pagesize: 10,
         pageTotal: 0,
 
         userList: []
@@ -96,15 +68,12 @@
           pagesize: this.pagesize
         }
         getUserList(params).then(res => {
-          if (res.success) {
-            this.pageTotal = res.data.total
-            this.userList = res.data.data
-            this.userList.forEach(item => {
-              if (item.email == '' || item.email == null) {
-                item.email = '- - -'
-              }
-            })
 
+          if (res.success) {
+            this.pageTotal = res.data.pageTotal
+            this.userList = res.data.data
+          }else {
+            this.$message({ message: '获取列表失败', type: 'error', duration: 1700 })
           }
         })
       },

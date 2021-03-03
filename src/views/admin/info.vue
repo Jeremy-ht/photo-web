@@ -60,7 +60,7 @@
     methods: {
       // 初始化
       getInit: function() {
-        let admin = JSON.parse(window.localStorage.getItem('AdminInfoFlower'))
+        let admin = JSON.parse(window.localStorage.getItem('AdminInfoPhoto'))
         if (admin == undefined || admin == null || admin == '') {
           this.$router.push('/login')
           this.$message({ message: '请先登录再操作系统', type: 'error', duration: 1700 })

@@ -55,7 +55,7 @@
     },
     methods: {
       init() {
-        let admin = JSON.parse(window.localStorage.getItem('AdminInfoFlower'))
+        let admin = JSON.parse(window.localStorage.getItem('AdminInfoPhoto'))
         if (admin == undefined || admin == null || admin == '') {
           this.$router.push('/login')
           this.$message({ message: '请先登录再操作', type: 'error', duration: 1700 })
@@ -69,7 +69,7 @@
         this.$store.dispatch('app/toggleSideBar')
       },
       async logout() {
-        window.localStorage.removeItem("AdminInfoFlower")
+        window.localStorage.removeItem("AdminInfoPhoto")
         this.$router.push(`/login`)
       }
     }

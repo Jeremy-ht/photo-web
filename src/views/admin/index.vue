@@ -5,20 +5,12 @@
       <el-button class="admin-add-btn" type="primary" size="mini" @click="addAdminBtn">新增员工</el-button>
 
       <!--表格-->
-      <el-table height="375" :data="adminList" stripe style="width: 100%; margin-top: 10px" border size="small">
+      <el-table :data="adminList" stripe style="width: 100%; margin-top: 10px" border size="small">
         <el-table-column label="#" type="index" align="center"/>
-        <el-table-column label="员工姓名" prop="name" align="center"/>
         <el-table-column label="员工用户名" prop="username" align="center" />
+        <el-table-column label="姓名" prop="name" align="center" />
         <el-table-column label="联系方式" prop="phone" align="center" width="130px"/>
-        <!--        <el-table-column label="性别" prop="sex" align="center" width="80px">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            <span v-if="scope.row.sex == 1">男</span>-->
-        <!--            <span v-else>女</span>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
 
-        <!--        <el-table-column label="邮箱" prop="email" align="center" width="180px"/>-->
-        <el-table-column label="账号创建者" prop="creatorName" align="center"/>
         <el-table-column label="账号创建时间" align="center" width="170px">
           <template slot-scope="scope">
             <i class="el-icon-time"/>
@@ -106,7 +98,7 @@
       return {
         // 分页查询
         pagenum: 1,
-        pagesize: 8,
+        pagesize: 10,
         pageTotal: 0,
 
         // 添加用户对话框
@@ -118,8 +110,6 @@
           username: '',
           name: '',
           phone: '',
-          creator: 1,
-          icon: 'http://service.szhtkj.com.cn/SzhtShop/uploads/default/avatar/userimg.png'
         },
 
         // 添加用户表单验证
@@ -166,11 +156,11 @@
         }
         getAdminList(params).then(res => {
           if (res.success) {
-            this.pageTotal = res.data.total
+            this.pageTotal = res.data.pageTotal
             this.adminList = res.data.data
-
+            console.log(this.adminList)
           } else {
-            this.$message({ message: '员工列表失败', type: 'error', duration: 1700 })
+            this.$message({ message: '获取员工列表失败', type: 'error', duration: 1700 })
           }
 
         })
@@ -180,7 +170,7 @@
       // 是否登录
       loginIs() {
         // 是否登录
-        let admin = JSON.parse(window.localStorage.getItem('AdminInfoFlower'))
+        let admin = JSON.parse(window.localStorage.getItem('AdminInfoPhoto'))
         if (admin == undefined || admin == null || admin == '') {
           this.$message({ message: '请先登录', type: 'error', duration: 1700 })
           this.$router.push({ path: '/login' })
@@ -207,8 +197,7 @@
 
       },
       addAdmin() {
-        let admin = this.addAdminInfo
-        addAdmin('1', admin).then(res => {
+        addAdmin(this.addAdminInfo).then(res => {
           if (res.success) {
             this.addDialogVisible = false
             this.getAdminList()

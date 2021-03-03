@@ -5,7 +5,7 @@
       <el-row>
         <el-col>
           <!-- 新增按钮 -->
-          <el-button class="admin-add-btn" type="primary" size="mini" @click="addCateBtn">新增品牌</el-button>
+          <el-button class="admin-add-btn" type="primary" size="mini" @click="addCateBtn">新增门店</el-button>
         </el-col>
       </el-row>
 
@@ -13,32 +13,20 @@
       <!-- 表格 -->
       <el-table :data="cateList" stripe style="width: 100%; margin-top: 10px" border size="small">
         <el-table-column label="#" type="index" align="center"/>
-        <el-table-column label="品牌名称" prop="categoryname" align="center"/>
-        <el-table-column label="品牌名称创建时间" align="center">
+        <el-table-column label="门店地址" prop="categoryname" align="center"/>
+        <el-table-column label="门店电话" prop="creator" align="center"/>
+        <el-table-column label="门店创建时间" align="center">
           <template slot-scope="scope">
             <span style="margin-left: 10px">{{ scope.row.creatime }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="是否在首页显示" align="center">
-          <template slot-scope="scope">
-            <el-switch
-              @change="changeState(scope.row.id, scope.row.creator)"
-              v-model="scope.row.creator == 1"
-              inactive-text="不显示"
-              inactive-color="#f3f3f3"
-              active-color="#5a98de"
-              active-text="显示">
-            </el-switch>
           </template>
         </el-table-column>
 
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <!--修改-->
-            <el-button type="primary" size="mini" @click="updCateBtn(scope.row.id)">
-              修改
-            </el-button>
+<!--            <el-button type="primary" size="mini" @click="updCateBtn(scope.row.id)">-->
+<!--              修改-->
+<!--            </el-button>-->
             <!-- 删除 -->
             <el-button class="del" type="danger" size="mini" @click="delCateBtn(scope.row.id)">
               删除
@@ -57,12 +45,15 @@
 
 
     <!--添加分类的对话框-->
-    <el-dialog title="添加鲜花分类" :visible.sync="addDialogVisible" width="40%" @close="closeAddAdminForm()">
+    <el-dialog title="添加门店" :visible.sync="addDialogVisible" width="40%" @close="closeAddAdminForm()">
       <span>
         <!--表单-->
         <el-form :model="addCateInfo" :rules="addCateRules" ref="addCateRef" label-width="180px">
-          <el-form-item label="分类名称" prop="categoryname">
+          <el-form-item label="门店地址">
             <el-input v-model="addCateInfo.categoryname" style="width: 200px"/>
+          </el-form-item>
+          <el-form-item label="门店电话">
+            <el-input v-model="addCateInfo.creator" style="width: 200px"/>
           </el-form-item>
         </el-form>
       </span>
@@ -75,11 +66,11 @@
     </el-dialog>
 
     <!--修改分类的对话框-->
-    <el-dialog title="修改鲜花分类" :visible.sync="updDialogVisible" width="40%" @close="closeupdAdminForm()">
+    <el-dialog title="修改门店" :visible.sync="updDialogVisible" width="40%" @close="closeupdAdminForm()">
       <span>
         <!--表单-->
         <el-form :model="updCateInfo" :rules="addCateRules" ref="updCateRef" label-width="180px">
-          <el-form-item label="分类名称" prop="categoryname">
+          <el-form-item label="门店地址" prop="categoryname">
             <el-input v-model="updCateInfo.categoryname" style="width: 200px"/>
           </el-form-item>
         </el-form>
@@ -112,7 +103,7 @@
         updDialogVisible: false,
         addCateInfo: {
           categoryname: '',
-          creator: 1
+          creator: ''
         },
 
         updCateInfo: {},
@@ -120,7 +111,7 @@
         // 添加分类表单验证
         addCateRules: {
           categoryname: [
-            {required: true, message: '请输入分类名', trigger: 'blur'},
+            {required: true, message: '请输入门店名', trigger: 'blur'},
             {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
           ]
 
@@ -144,9 +135,8 @@
         }
         getCategoryList(params).then(res => {
           if (res.success) {
-            this.pageTotal = res.data.total
+            this.pageTotal = res.data.pageTotal
             this.cateList = res.data.data
-            // console.log(this.cateList)
           }
         })
       },
@@ -167,7 +157,11 @@
       },
       addCate() {
         if (this.addCateInfo.categoryname == '') {
-          this.$message({message: '分类名称不能为空!', type: 'error', duration: 1700})
+          this.$message({message: '门店地址不能为空!', type: 'error', duration: 1700})
+          return
+        }
+        if (this.addCateInfo.creator == '') {
+          this.$message({message: '门店电话不能为空!', type: 'error', duration: 1700})
           return
         }
 
@@ -175,9 +169,9 @@
           if (res.success) {
             this.getCateList()
             this.addDialogVisible = false
-            this.$message({message: res.message, type: 'success', duration: 1700})
+            this.$message({message: '添加成功', type: 'success', duration: 1700})
           } else {
-            this.$message({message: res.message, type: 'error', duration: 1700})
+            this.$message({message: '添加失败', type: 'error', duration: 1700})
           }
         })
 
@@ -197,7 +191,7 @@
       },
       updCate() {
         if (this.updCateInfo.categoryname == '') {
-          this.$message({message: '分类名称不能为空!', type: 'error', duration: 1700})
+          this.$message({message: '分类地址不能为空!', type: 'error', duration: 1700})
           return
         }
 
@@ -222,9 +216,9 @@
           delCategory(id).then(res => {
             if (res.success) {
               this.getCateList()
-              this.$message({message: res.message, type: 'success', duration: 1700})
+              this.$message({message: '删除成功', type: 'success', duration: 1700})
             } else {
-              this.$message({message: res.message, type: 'error', duration: 1700})
+              this.$message({message:  '删除失败', type: 'error', duration: 1700})
             }
           })
         })

@@ -7,15 +7,15 @@ const baseURL = 'http://127.0.0.1:3000'
  */
 export function getAdminList(params) {
   return request({
-    url: baseURL + `/admin/getAdminList`,
-    method: 'get',
-    params
+    url: `/admin/getAdminList`,
+    method: 'post',
+    data: params
   })
 }
 
-export function addAdmin(id, params) {
+export function addAdmin(params) {
   return request({
-    url: baseURL + `/admin/addAdmin/${id}`,
+    url: `/admin/register`,
     method: 'post',
     data: params
   })
@@ -23,8 +23,9 @@ export function addAdmin(id, params) {
 
 export function delAdmin(id) {
   return request({
-    url: baseURL + `/admin/delAdmin/${id}`,
-    method: 'get'
+    url: `/admin/delAdmin`,
+    method: 'post',
+    data: {'id': id}
   })
 }
 
@@ -33,29 +34,29 @@ export function delAdmin(id) {
  */
 export function getUserList(params) {
   return request({
-    url: baseURL + `/user/getUserList`,
-    method: 'get',
-    params
+    url: `/user/getUsers`,
+    method: 'post',
+    data: params
   })
 }
 
 export function disableUserById(userId) {
   return request({
-    url: baseURL + `/user/disableUserById/${userId}`,
+    url: `/user/disableUserById/${userId}`,
     method: 'get'
   })
 }
 
 export function ableUserById(userId) {
   return request({
-    url: baseURL + `/user/ableUserById/${userId}`,
+    url: `/user/ableUserById/${userId}`,
     method: 'get'
   })
 }
 
 export function updUserInfo(params) {
   return request({
-    url: baseURL + `/user/updUserInfo`,
+    url: `/user/updUserInfo`,
     method: 'post',
     data: params
   })
@@ -66,22 +67,23 @@ export function updUserInfo(params) {
  */
 export function getCategoryList(params) {
   return request({
-    url: baseURL + `/category/getCategoryList`,
-    method: 'get',
-    params
+    url: `/category/getCategoryList`,
+    method: 'post',
+    data: params
   })
 }
 
 export function delCategory(id) {
   return request({
-    url: baseURL + `/category/delCategory/${id}`,
-    method: 'get'
+    url: `/category/delCategory`,
+    method: 'post',
+    data: {'id': id}
   })
 }
 
 export function addCategory(params) {
   return request({
-    url: baseURL + `/category/addCategory`,
+    url: `/category/addCategory`,
     method: 'post',
     data: params
   })
@@ -89,14 +91,14 @@ export function addCategory(params) {
 
 export function getCategoryById(id) {
   return request({
-    url: baseURL + `/category/getCategoryById/${id}`,
+    url: `/category/getCategoryById/${id}`,
     method: 'get'
   })
 }
 
 export function updCategory(params) {
   return request({
-    url: baseURL + `/category/updCategory`,
+    url: `/category/updCategory`,
     method: 'post',
     data: params
   })
@@ -107,21 +109,21 @@ export function updCategory(params) {
  */
 export function getCommentList(pagenum = 1, pagesize = 10, detailId = 0) {
   return request({
-    url: baseURL + `/comment/getCommentList/${pagenum}/${pagesize}/${detailId}`,
+    url: `/comment/getCommentList/${pagenum}/${pagesize}/${detailId}`,
     method: 'get'
   })
 }
 
 export function disableComment(id, state) {
   return request({
-    url: baseURL + `/comment/disableComment/${id}/${state}`,
+    url: `/comment/disableComment/${id}/${state}`,
     method: 'get'
   })
 }
 
 export function addComment(params) {
   return request({
-    url: baseURL + `/comment/addComment`,
+    url: `/comment/addComment`,
     method: 'post',
     data: params
   })
@@ -132,7 +134,7 @@ export function addComment(params) {
  */
 export function getLogList(params) {
   return request({
-    url: baseURL + `/log/getLogList`,
+    url: `/log/getLogList`,
     method: 'get',
     params
   })
@@ -140,7 +142,7 @@ export function getLogList(params) {
 
 export function getUserLogList(params) {
   return request({
-    url: baseURL + `/log/getUserLogList`,
+    url: `/log/getUserLogList`,
     method: 'get',
     params
   })
@@ -151,7 +153,7 @@ export function getUserLogList(params) {
  */
 export function addScenery(params) {
   return request({
-    url: baseURL + `/phones/addScenery`,
+    url: `/photo/addPhoto`,
     method: 'post',
     data: params
   })
@@ -159,43 +161,43 @@ export function addScenery(params) {
 
 export function getInfoList6(id) {
   return request({
-    url: baseURL + `/phones/getInfoList6/${id}`,
+    url: `/phones/getInfoList6/${id}`,
     method: 'get'
   })
 }
 
 export function addIndexShow(id, image) {
   return request({
-    url: baseURL + `/phones/addIndexShow/${id}/${image}`,
+    url: `/phones/addIndexShow/${id}/${image}`,
     method: 'get'
   })
 }
 
 export function fourList() {
   return request({
-    url: baseURL + `/phones/getFourIcon`,
+    url: `/phones/getFourIcon`,
     method: 'get'
   })
 }
 
-export function getSceneryList(params, categoryId) {
+export function getSceneryList(params) {
   return request({
-    url: baseURL + `/phones/getSceneryList/${categoryId}`,
-    method: 'get',
-    params
+    url: `/photo/getPhotoList`,
+    method: 'post',
+    data: params
   })
 }
 
 export function getSceneryIndex() {
   return request({
-    url: baseURL + `/phones/getSceneryIndex`,
+    url: `/phones/getSceneryIndex`,
     method: 'get'
   })
 }
 
 export function getSceneryListByCate(id) {
   return request({
-    url: baseURL + `/flowers/getSceneryListByCate/${id}`,
+    url: `/flowers/getSceneryListByCate/${id}`,
     method: 'get'
   })
 
@@ -203,49 +205,51 @@ export function getSceneryListByCate(id) {
 
 // export function getSceneryIndex() {
 //   return request({
-//     url: baseURL + `/flowers/getSceneryIndex`,
+//     url: `/flowers/getSceneryIndex`,
 //     method: 'get'
 //   })
 // }
 
 export function getSceneryInfo(id) {
   return request({
-    url: baseURL + `/phones/getSceneryInfo/${id}`,
-    method: 'get'
+    url: `/photo/getPhotoById`,
+    method: 'post',
+    data: {'id': id}
   })
 }
 
 export function pullScenery(id, state) {
   return request({
-    url: baseURL + `/category/pullCategory/${id}/${state}`,
+    url: `/category/pullCategory/${id}/${state}`,
     method: 'get'
   })
 }
 
 export function pullScenery2(id, state) {
   return request({
-    url: baseURL + `/flowers/pullScenery/${id}/${state}`,
+    url: `/flowers/pullScenery/${id}/${state}`,
     method: 'get'
   })
 }
 
 export function delScenery(id) {
   return request({
-    url: baseURL + `/flowers/delScenery/${id}`,
-    method: 'get'
+    url: `/photo/delPhoto`,
+    method: 'post',
+    data: {'id': id}
   })
 }
 
 export function getrotationList(id) {
   return request({
-    url: baseURL + `/detail/getrotationList`,
+    url: `/detail/getrotationList`,
     method: 'get'
   })
 }
 
 export function getSearchContent(params) {
   return request({
-    url: baseURL + `/user/getSearchList`,
+    url: `/user/getSearchList`,
     method: 'post',
     data: params
   })
@@ -257,7 +261,7 @@ export function getSearchContent(params) {
 
 export function adminLogin(params) {
   return request({
-    url: baseURL + `/admin/adminLogin`,
+    url: `/admin/login`,
     method: 'post',
     data: params
   })
@@ -265,7 +269,7 @@ export function adminLogin(params) {
 
 export function updPasswordById(id, params) {
   return request({
-    url: baseURL + `/user/updPasswordById/${id}`,
+    url: `/user/updPasswordById/${id}`,
     method: 'post',
     data: params
   })
@@ -273,7 +277,7 @@ export function updPasswordById(id, params) {
 
 export function updPasswordByIdadmin(id, params) {
   return request({
-    url: baseURL + `/admin/updPasswordById/${id}`,
+    url: `/admin/updPasswordById/${id}`,
     method: 'post',
     data: params
   })
@@ -284,7 +288,7 @@ export function updPasswordByIdadmin(id, params) {
  */
 export function uploadFile() {
   return request({
-    url: baseURL + `/upload/updataFile`,
+    url: `/upload/updataFile`,
     method: 'post',
     data: params
   })
@@ -292,7 +296,7 @@ export function uploadFile() {
 
 export function getHomeCount() {
   return request({
-    url: baseURL + `/admin/getHomeCount`,
+    url: `/admin/getHomeCount`,
     method: 'get'
   })
 }
@@ -303,14 +307,14 @@ export function getHomeCount() {
 
 export function getCategoryListHome() {
   return request({
-    url: baseURL + `/category/getCategoryList`,
+    url: `/category/getCategoryList`,
     method: 'get'
   })
 }
 
 export function userLogin(params) {
   return request({
-    url:  `/user/login`,
+    url: `/user/login`,
     method: 'post',
     data: params
   })
@@ -318,7 +322,7 @@ export function userLogin(params) {
 
 export function addUser(params) {
   return request({
-    url:  `/user/register`,
+    url: `/user/register`,
     method: 'post',
     data: params
   })
@@ -330,28 +334,28 @@ export function addUser(params) {
 
 export function getEchartsCategory() {
   return request({
-    url: baseURL + `/detail/getEchartsCategory`,
+    url: `/detail/getEchartsCategory`,
     method: 'get'
   })
 }
 
 export function getEchartsOrder() {
   return request({
-    url: baseURL + `/orders/getEchartsOrder`,
+    url: `/orders/getEchartsOrder`,
     method: 'get'
   })
 }
 
 export function getEchartsCate() {
   return request({
-    url: baseURL + `/orders/getEchartsCate`,
+    url: `/orders/getEchartsCate`,
     method: 'get'
   })
 }
 
 export function getEchartsUser() {
   return request({
-    url: baseURL + `/detail/getEchartsUser`,
+    url: `/detail/getEchartsUser`,
     method: 'get'
   })
 }
@@ -369,7 +373,7 @@ export function addAddress(address) {
 
 export function getAddressList(id) {
   return request({
-    url: baseURL + `/address/getAddressList/${id}`,
+    url: `/address/getAddressList/${id}`,
     method: 'get'
   })
 }
@@ -379,7 +383,7 @@ export function getAddressList(id) {
  */
 export function addCart(cart) {
   return request({
-    url: baseURL + `/cart/addCart`,
+    url: `/cart/addCart`,
     method: 'post',
     data: cart
   })
@@ -387,28 +391,28 @@ export function addCart(cart) {
 
 export function getCartList(id) {
   return request({
-    url: baseURL + `/cart/getCartList/${id}`,
+    url: `/cart/getCartList/${id}`,
     method: 'get'
   })
 }
 
 export function delCart(id) {
   return request({
-    url: baseURL + `/cart/delCart/${id}`,
+    url: `/cart/delCart/${id}`,
     method: 'get'
   })
 }
 
 export function updAmount(uid, id, value) {
   return request({
-    url: baseURL + `/cart/updAmount/${uid}/${id}/${value}`,
+    url: `/cart/updAmount/${uid}/${id}/${value}`,
     method: 'get'
   })
 }
 
 export function getShoppingNum(id) {
   return request({
-    url: baseURL + `/cart/getShoppingNum/${id}`,
+    url: `/cart/getShoppingNum/${id}`,
     method: 'get'
   })
 }
@@ -418,7 +422,7 @@ export function getShoppingNum(id) {
  */
 export function addOrder(order) {
   return request({
-    url: baseURL + `/orders/addOrder`,
+    url: `/orders/addOrder`,
     method: 'post',
     data: order
   })
@@ -426,7 +430,7 @@ export function addOrder(order) {
 
 export function addOrder2(order) {
   return request({
-    url: baseURL + `/orders/addOrder2`,
+    url: `/orders/addOrder2`,
     method: 'post',
     data: order
   })
@@ -434,7 +438,7 @@ export function addOrder2(order) {
 
 export function getOrderList(params) {
   return request({
-    url: baseURL + `/orders/getOrderList`,
+    url: `/orders/getOrderList`,
     method: 'get',
     params
   })

@@ -82,32 +82,32 @@ export const constantRoutes = [
   },
 
   /**
-   * 手机管理
+   * 照片管理
    */
   {
     path: '/phone',
     component: Layout,
     redirect: '/phone/list',
-    name: '手机管理',
-    meta: { title: '手机管理', icon: 'el-icon-s-cooperation' },
+    name: '照片管理',
+    meta: { title: '照片管理', icon: 'el-icon-s-cooperation' },
     children: [
       {
         path: 'show',
-        name: '手机列表',
+        name: '照片列表',
         component: () => import('@/views/scenery/list'),
-        meta: { title: '商品列表', icon: 'table' }
+        meta: { title: '照片列表', icon: 'table' }
       },
       {
         path: 'add',
-        name: '手机添加',
+        name: '照片添加',
         component: () => import('@/views/scenery/add'),
-        meta: { title: '商品添加', icon: 'table' }
+        meta: { title: '照片添加', icon: 'table' }
       },
       {
         path: 'category',
-        name: '品牌分类',
+        name: '门店管理',
         component: () => import('@/views/scenery/category'),
-        meta: { title: '品牌分类', icon: 'table' }
+        meta: { title: '门店管理', icon: 'table' }
       }
     ]
   },
@@ -149,21 +149,25 @@ export const constantRoutes = [
   },
 
   {
-    path: '/system',
+    path: '/admin',
     component: Layout,
-    redirect: '/admin',
-    name: '系统管理',
-    meta: { title: '系统管理', icon: 'el-icon-s-tools' },
     children: [
       {
         path: 'admin',
-        name: 'admin',
+        name: '员工列表',
         component: () => import('@/views/admin/index'),
-        meta: { title: '员工列表', icon: 'table' }
-      },
+        meta: { title: '员工列表', icon: 'el-icon-s-claim' }
+      }
+    ]
+  },
+
+  {
+    path: '/user',
+    component: Layout,
+    children: [
       {
         path: 'user',
-        name: 'user',
+        name: '用户列表',
         component: () => import('@/views/user/index'),
         meta: { title: '用户列表', icon: 'table' }
       }
@@ -186,21 +190,20 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  /**
-   *  评论
-   */
-  // {
-  //   path: '/order',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'orderList',
-  //       name: '订单列表',
-  //       component: () => import('@/views/comment/orders'),
-  //       meta: { title: '订单列表', icon: 'el-icon-s-comment' }
-  //     }
-  //   ]
-  // },
+
+
+  {
+    path: '/order',
+    component: Layout,
+    children: [
+      {
+        path: 'orderList',
+        name: '订单列表',
+        component: () => import('@/views/comment/orders'),
+        meta: { title: '订单列表', icon: 'el-icon-s-comment' }
+      }
+    ]
+  },
   /**
    *  统计
    */
@@ -225,43 +228,6 @@ export const constantRoutes = [
       // }
     ]
   },
-  /**
-   * 日志管理
-   */
-
-  {
-    path: '/log',
-    component: Layout,
-    children: [
-      {
-        path: 'sysLog',
-        name: '日志列表',
-        component: () => import('@/views/log/sysLog'),
-        meta: { title: '日志列表', icon: 'el-icon-s-claim' }
-      }
-    ]
-  },
-  // {
-  //   path: '/log',
-  //   component: Layout,
-  //   redirect: '/log/sysLog',
-  //   name: '日志管理',
-  //   meta: { title: '日志管理', icon: 'el-icon-s-claim' },
-  //   children: [
-  //     {
-  //       path: 'sysLog',
-  //       name: '系统日志',
-  //       component: () => import('@/views/log/sysLog'),
-  //       meta: { title: '系统日志', icon: 'table' }
-  //     },
-  //     {
-  //       path: 'userLog',
-  //       name: '用户日志',
-  //       component: () => import('@/views/log/userLog'),
-  //       meta: { title: '用户日志', icon: 'table' }
-  //     }
-  //   ]
-  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

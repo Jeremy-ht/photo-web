@@ -2,13 +2,11 @@
   <div class="container">
 
     <div class="container-item-hr">
-      <svg @click="goHome()" t="1614167354200" class="icon"
-           viewBox="0 0 1024 1024" version="1.1"
-           xmlns="http://www.w3.org/2000/svg" p-id="2441"
-           width="200" height="200">
+      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+           p-id="3317" width="200" height="200">
         <path
-          d="M645.924571 0C693.101714 0 731.428571 35.328 731.428571 78.774857v866.450286C731.428571 988.672 693.101714 1024 645.924571 1024H85.504C38.326857 1024 0 988.672 0 945.225143V78.774857C0 35.328 38.326857 0 85.504 0h560.420571zM841.142857 438.857143a36.571429 36.571429 0 0 1 36.571429 36.571428v512a36.571429 36.571429 0 0 1-73.142857 0v-512a36.571429 36.571429 0 0 1 36.571428-36.571428z m146.285714 292.571428a36.571429 36.571429 0 0 1 36.571429 36.571429v219.428571a36.571429 36.571429 0 0 1-73.142857 0v-219.428571a36.571429 36.571429 0 0 1 36.571428-36.571429zM657.773714 73.069714h-585.142857v877.641143h585.142857v-877.714286zM585.142857 331.995429c0 13.897143-7.460571 26.112-18.651428 33.133714C550.253714 458.605714 466.432 530.066286 365.714286 530.066286S181.174857 458.605714 164.937143 365.129143A39.204571 39.204571 0 0 1 146.285714 332.068571C146.285714 310.272 164.498286 292.571429 186.88 292.571429c22.381714 0 40.521143 17.700571 40.521143 39.497142a38.765714 38.765714 0 0 1-12.8 28.672C228.425143 429.641143 290.889143 481.718857 365.714286 481.718857s137.289143-52.077714 151.113143-120.978286a38.765714 38.765714 0 0 1-12.8-28.745142c0-21.723429 18.139429-39.424 40.521142-39.424 22.381714 0 40.594286 17.700571 40.594286 39.497142zM329.142857 804.571429h73.142857a36.571429 36.571429 0 0 1 0 73.142857h-73.142857a36.571429 36.571429 0 0 1 0-73.142857z"
-          p-id="2442" fill="#e6e6e6"></path>
+          d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
+          fill="#FF8040" opacity=".939" p-id="3318"></path>
       </svg>
     </div>
 
@@ -17,46 +15,25 @@
       <div class="info-show">
 
         <div class="info-show-img">
-          <img class="imgs" :src="detailInfo.image" alt="">
+          <img class="imgs" :src="detailInfo.icon" alt="">
         </div>
 
         <div class="info-show-info">
 
           <p class="info-title">{{detailInfo.name}}</p>
           <div class="info-title-title">
-            <div style="width: 550px">{{detailInfo.title}}</div>
             <div><span class="info-price-number1">￥<span
               class="info-price-number">{{detailInfo.price + '.00'}}</span></span>
             </div>
           </div>
-
-          <div class="shuliang">
-            <span class="fl align-center">数量：</span>
-
-            <el-input-number class="number" v-model="num" size="small"
-                             @change="handleChange" :min="1"/>
-          </div>
-
-
-          <div class="ms">
-
-            <div style=" padding-right: 20px;margin-top:30px;font-size: 14px;
-            color: #8d8d8d;">描述：
-            </div>
-
-            <div class="ys">
-              <div>颜色：<span style="margin-left: 31px">{{detailInfo.color}}</span></div>
-              <div>重量：<span style="margin-left: 31px">{{detailInfo.weight}} kg</span></div>
-              <div>上市年份：<span style="margin-left: 3px">{{detailInfo.year}} 年</span></div>
-              <div>屏幕尺寸：<span style="margin-left: 3px">{{detailInfo.chicun}} 英寸</span></div>
-            </div>
-
+          <div style="font-size: 14px;color: #555555;margin-top: 30px" >
+            拍摄所需时长: <span >{{detailInfo.time + ' 小时'}}</span>
           </div>
 
           <div class="info-btns">
             <div style="float: right">
-              <div class="buySub hvr-shutter-out-horizontal" @click="addCart(detailInfo.id)">加购物车</div>
-              <div class="buySub hvr-shutter-out-horizontal1" @click="go(detailInfo.id)">立即购买</div>
+<!--              <div class="buySub hvr-shutter-out-horizontal" @click="addCart(detailInfo.id)">加购物车</div>-->
+              <div class="buySub hvr-shutter-out-horizontal" @click="go(detailInfo.id)">立即预约</div>
             </div>
 
           </div>
@@ -71,39 +48,9 @@
     <div style="width: 100%;height: 100%;background-color: #ededed;padding-top: 30px">
       <div class="person-show">
 
-        <div class="person-show-left">
-          <h3>销售排行榜</h3>
-
-          <div class="paihangbang">
-            <div class="title-1-i">
-
-              <div class="title-item" v-for="(item, index) in oList" :index="item.id">
-                <div class="header-item-person-shop-number">
-                  {{index + 1}}
-                </div>
-                <img class="phone-img"
-                     @click="goDetailInfo(item.id)" :src="item.image"
-                     alt="">
-
-                <div class="phone-title">{{item.title}}</div>
-
-                <!--                <div class="phone-feature">{{item.name}}</div>-->
-
-                <div class="phone-price">
-                  ¥ {{item.price}}
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-
         <div class="person-show-right">
           <div class="person-show-right-div">
-            <span>产品详情</span>
+            <span>详情</span>
           </div>
 
           <div v-html="detailInfo.content" style="background: white" class="content">
@@ -228,26 +175,13 @@
         // 获取详情
         await getSceneryInfo(this.detailId).then(res => {
           if (res.success) {
-            this.detailInfo = res.data.data
+            this.detailInfo = res.data[0]
           } else {
             this.$message({message: '详情获取失败，请刷新再试！', type: 'error', duration: 2000})
           }
 
         })
 
-
-        // 排行榜
-        await getInfoList6(this.detailId).then(res => {
-          if (res.success) {
-            this.oList = res.data.data
-            console.log(this.oList)
-          } else {
-            this.$message({
-              message: '数据获取失败，请刷新重试',
-              type: 'error', duration: 2000
-            })
-          }
-        })
 
         // // 评论
         // await getCommentList(1, 100, this.detailId).then(res => {
@@ -453,7 +387,7 @@
   }
 
   .imgs {
-    width: 400px;
+    width: 370px;
     height: 400px;
   }
 
@@ -511,7 +445,7 @@
   }
 
   .info-btns {
-    margin-top: 25px;
+    margin-top: 180px;
     font-size: 14px;
     height: 42px;
   }
@@ -743,7 +677,7 @@
   }
 
   .person-show-right {
-    width: 980px;
+    width: 1200px;
     border: solid 1px #dbdbdb;
     background-color: white;
     border-radius: 10px;
@@ -817,8 +751,10 @@
   }
 
   .content {
-    width: 978px;
-    height: 100%;
+    /*width: 978px;*/
+    /*height: 100%;*/
+    padding: 40px;
+    text-align: center;
   }
 
   /deep/ .content img {

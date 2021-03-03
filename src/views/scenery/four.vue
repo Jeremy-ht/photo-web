@@ -143,7 +143,7 @@
     methods: {
       // 初始化
       async getInit() {
-        let admin = JSON.parse(window.localStorage.getItem('AdminInfoFlower'))
+        let admin = JSON.parse(window.localStorage.getItem('AdminInfoPhoto'))
         if (admin == undefined || admin == null || admin == '') {
           this.$router.push('/login')
           this.$message({message: '未登录', type: 'error', duration: 1700})

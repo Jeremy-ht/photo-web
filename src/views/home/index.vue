@@ -6,13 +6,11 @@
       <div class="header-item">
 
         <div class="header-item-icon">
-          <svg @click="goHome()" t="1614167354200" class="icon"
-               viewBox="0 0 1024 1024" version="1.1"
-               xmlns="http://www.w3.org/2000/svg" p-id="2441"
-               width="200" height="200">
+          <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               p-id="3317" width="200" height="200">
             <path
-              d="M645.924571 0C693.101714 0 731.428571 35.328 731.428571 78.774857v866.450286C731.428571 988.672 693.101714 1024 645.924571 1024H85.504C38.326857 1024 0 988.672 0 945.225143V78.774857C0 35.328 38.326857 0 85.504 0h560.420571zM841.142857 438.857143a36.571429 36.571429 0 0 1 36.571429 36.571428v512a36.571429 36.571429 0 0 1-73.142857 0v-512a36.571429 36.571429 0 0 1 36.571428-36.571428z m146.285714 292.571428a36.571429 36.571429 0 0 1 36.571429 36.571429v219.428571a36.571429 36.571429 0 0 1-73.142857 0v-219.428571a36.571429 36.571429 0 0 1 36.571428-36.571429zM657.773714 73.069714h-585.142857v877.641143h585.142857v-877.714286zM585.142857 331.995429c0 13.897143-7.460571 26.112-18.651428 33.133714C550.253714 458.605714 466.432 530.066286 365.714286 530.066286S181.174857 458.605714 164.937143 365.129143A39.204571 39.204571 0 0 1 146.285714 332.068571C146.285714 310.272 164.498286 292.571429 186.88 292.571429c22.381714 0 40.521143 17.700571 40.521143 39.497142a38.765714 38.765714 0 0 1-12.8 28.672C228.425143 429.641143 290.889143 481.718857 365.714286 481.718857s137.289143-52.077714 151.113143-120.978286a38.765714 38.765714 0 0 1-12.8-28.745142c0-21.723429 18.139429-39.424 40.521142-39.424 22.381714 0 40.594286 17.700571 40.594286 39.497142zM329.142857 804.571429h73.142857a36.571429 36.571429 0 0 1 0 73.142857h-73.142857a36.571429 36.571429 0 0 1 0-73.142857z"
-              p-id="2442" fill="#e6e6e6"></path>
+              d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
+              fill="#FF8040" opacity=".939" p-id="3318"></path>
           </svg>
         </div>
 
@@ -82,58 +80,6 @@
       </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- 四大品牌 -->
-    <!-- ========================= -->
-    <div class="content-phone" v-show="showIndex == 1">
-
-      <div class="pull-4">
-        <div class="pull-4-item">
-
-          <div class="four-item" v-for="item in fourList" :index="item.id">
-            <img class="img" :src="item.icon" @click="goDetailInfo(item.id)">
-          </div>
-
-        </div>
-      </div>
-
-      <div class="gray-box">
-        <div class="title">
-        </div>
-      </div>
-
-      <div class="content-show">
-
-        <div class="new bor" v-for="(item, index) in cate" :index="index">
-          <h1 class="title-1">{{item}}</h1>
-
-          <div class="title-1-i">
-
-            <div class="title-item" v-for="(items, index) in showLists[index]" :index="items.id">
-
-              <img class="phone-img"
-                   @click="goDetailInfo(items.id)" :src="items.image"
-                   alt="">
-
-              <div class="phone-title">{{items.title}}</div>
-
-              <div class="phone-feature">{{items.name}}</div>
-
-              <div class="phone-price">
-                ¥ {{items.price}}
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
 
     <!-- ========================= -->
     <!-- 所有分类 -->
@@ -142,35 +88,21 @@
 
       <div class="content-phone-div">
 
-        <div class="category">
-
-          <span class="plfl">品牌分类:</span>
-
-          <div class="category-item">
-            <span v-for="item in cateList" :index="item.id"
-                  @click="getcateList(item.id)">{{item.categoryname}}</span>
-          </div>
-
-        </div>
-
-
         <div class="content-phone-show">
           <div class="content-show1">
 
             <div class="new bor2">
-              <!--              <h1 class="title-1">华为</h1>-->
 
               <div class="title-1-i">
-                <div  v-if="otherList.length == 0" class="se">没有商品可以浏览...</div>
+                <div v-if="otherList.length == 0" class="se">没有产品可以浏览...</div>
 
                 <div class="title-item" v-else v-for="item in otherList" :index="item.id">
 
 
                   <img class="phone-img"
-                       @click="goDetailInfo(item.id)" :src="item.image"
+                       @click="goDetailInfo(item.id)" :src="item.icon"
                        alt="">
 
-                  <div class="phone-title">{{item.title}}</div>
 
                   <div class="phone-feature">{{item.name}}</div>
 
@@ -179,8 +111,6 @@
                   </div>
 
                 </div>
-
-
 
 
               </div>
@@ -266,17 +196,6 @@
         cb(new Error('请输入合法的手机号'))
       }
 
-      // 验证邮箱的规则
-      let checkEmail = (rule, value, cb) => {
-        // 验证邮箱的正则表达式
-        const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-        if (regEmail.test(value)) {
-          // 合法的邮箱
-          return cb()
-        }
-        cb(new Error('请输入合法的邮箱'))
-      }
-
       return {
         activeIndex: '0',
         search: '',
@@ -297,7 +216,7 @@
 
         // 切换页面数据
         otherList: [],
-        showIndex: 1,
+        showIndex: 2,
         categoryname: '',
 
         isActive: false,
@@ -305,51 +224,6 @@
         loginDialog: false,
         regDialog: false,
         comment: '',
-
-        //表单数据绑定
-        loginForm: {
-          uname: '',
-          pwd: ''
-        },
-        //表单验证
-        loginFormRules: {
-          username:
-            [
-              {required: true, message: '请输入用户名', trigger: 'blur'},
-              {min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur'}
-            ],
-          password:
-            [
-              {required: true, message: '请输入密码', trigger: 'blur'},
-              {min: 3, max: 16, message: '长度在 3 到 16 个字符', trigger: 'blur'}
-            ]
-        },
-        //表单验证
-        loginFormRules2: {
-          uname:
-            [
-              {required: true, message: '请输入用户名', trigger: 'blur'},
-              {min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur'}
-            ],
-          pwd:
-            [
-              {required: true, message: '请输入密码', trigger: 'blur'},
-              {min: 3, max: 16, message: '长度在 3 到 16 个字符', trigger: 'blur'}
-            ],
-          phone: [
-            {required: true, message: '请输入手机号', trigger: 'blur'},
-            {validator: checkMobile, trigger: 'blur'}
-          ]
-        },
-        // 注册表单
-        registerForm: {
-          uname: '',
-          pwd: '',
-          sex: '1',
-          phone: '',
-          email: ''
-        },
-
         showLogin: false,
 
         // 购物车
@@ -377,60 +251,22 @@
         if (!this.loginIs()) {
           this.showLogin = false
         } else {
-          // 购物车商品数量
-          await getShoppingNum(this.UserInfo.id).then(res => {
-            if (res.success) {
-              this.shoppingNum = res.data.data
-
-            } else {
-              this.$message({
-                message: '数据获取失败，请刷新重试',
-                type: 'error', duration: 2000
-              })
-            }
-          })
+          // // 购物车商品数量
+          // await getShoppingNum(this.UserInfo.id).then(res => {
+          //   if (res.success) {
+          //     this.shoppingNum = res.data.data
+          //
+          //   } else {
+          //     this.$message({
+          //       message: '数据获取失败，请刷新重试',
+          //       type: 'error', duration: 2000
+          //     })
+          //   }
+          // })
           this.showLogin = true
         }
 
-        // 3分类
-        await getSceneryIndex().then(res => {
-          if (res.success) {
-
-            let data = res.data.data
-            for (let key in data) {
-              this.showLists.push(data[key])
-              this.cate.push(key)
-            }
-            console.log(this.showLists)
-          } else {
-            this.$message({message: '数据获取失败,请刷新!', type: 'error', duration: 2000})
-          }
-
-        })
-
-        // 4
-        await fourList().then(res => {
-          if (res.success) {
-            this.fourList = res.data.data
-
-          } else {
-            this.$message({message: '数据获取失败,请刷新!', type: 'error', duration: 2000})
-          }
-
-        })
-
-        // 获取导航菜单  放入更多里面
-        let params = {
-          pagenum: 1,
-          pagesize: 100
-        }
-        await getCategoryList(params).then(res => {
-          if (res.success) {
-            this.cateList = res.data.data
-          }
-        })
-
-
+        this.allShop()
       },
 
       // 全部商品
@@ -442,8 +278,7 @@
           pagesize: 100
         }
 
-        getSceneryList(params, 777).then(res => {
-
+        getSceneryList(params).then(res => {
           if (res.success) {
             this.otherList = res.data.data
           } else {
@@ -496,20 +331,15 @@
 
         if (this.searchText == '') {
           this.init()
-          this.showIndex = 1
-
+          this.showIndex = 2
           return
         }
-
-        console.log(this.searchText)
-
 
         let params = {
           pagenum: 1,
           pagesize: 100,
-          a: this.searchText.trim()
+          searchText: this.searchText.trim()
         }
-        console.log(params)
         await getSearchContent(params).then(res => {
           if (res.success) {
             this.showIndex = 3
@@ -528,8 +358,7 @@
 
       // 去首页
       goHome() {
-        this.showIndex = '1'
-        // this.$router.push({path: `/phone/home`})
+        this.showIndex = '2'
       },
 
       // 登录
@@ -1031,6 +860,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
+    border-radius: 6px;
     /*justify-content: space-between;*/
   }
 
@@ -1044,15 +874,17 @@
 
 
   .title-item {
-    height: 280px;
+    height: 320px;
     padding: 20px;
-    width: 230px;
+    width: 270px;
     margin-top: 10px;
-    margin-right: 6px;
+    margin-left: 7px;
+    margin-right: 18px;
     background-color: white;
     display: flex;
     flex-direction: column;
     cursor: pointer;
+
   }
 
   .title-item:hover {
@@ -1060,9 +892,15 @@
   }
 
   .phone-img {
-    width: 160px;
-    height: 160px;
+    width: 190px;
+    height: 210px;
     margin: 0 auto;
+  }
+
+
+  .phone-img:hover {
+    width: 220px;
+    height: 250px;
   }
 
   .phone-title {
@@ -1081,6 +919,12 @@
     white-space: nowrap;
     overflow: hidden;
   }
+
+  .phone-feature:hover {
+    font-size: 16px;
+    color: #ff6b25;
+  }
+
 
   .phone-price {
     margin-top: 10px;
@@ -1140,15 +984,16 @@
     color: #5a98de;
   }
 
-  .a{
+  .a {
     cursor: pointer;
   }
+
   .activecc {
     color: #5a98de;
   }
 
   .content-phone-show {
-    border-radius: 6px;
+    border-radius: 16px;
   }
 
   .se {
