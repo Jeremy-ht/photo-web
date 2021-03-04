@@ -267,9 +267,9 @@ export function adminLogin(params) {
   })
 }
 
-export function updPasswordById(id, params) {
+export function updPasswordById(params) {
   return request({
-    url: `/user/updPasswordById/${id}`,
+    url: `/user/updPasswordById`,
     method: 'post',
     data: params
   })

@@ -2,7 +2,8 @@
   <div class="container">
 
     <div class="container-item-hr">
-      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1"
+           xmlns="http://www.w3.org/2000/svg"
            p-id="3317" width="200" height="200">
         <path
           d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
@@ -26,13 +27,13 @@
               class="info-price-number">{{detailInfo.price + '.00'}}</span></span>
             </div>
           </div>
-          <div style="font-size: 14px;color: #555555;margin-top: 30px" >
-            拍摄所需时长: <span >{{detailInfo.time + ' 小时'}}</span>
+          <div style="font-size: 14px;color: #555555;margin-top: 30px">
+            拍摄所需时长: <span>{{detailInfo.time + ' 小时'}}</span>
           </div>
 
           <div class="info-btns">
             <div style="float: right">
-<!--              <div class="buySub hvr-shutter-out-horizontal" @click="addCart(detailInfo.id)">加购物车</div>-->
+              <!--              <div class="buySub hvr-shutter-out-horizontal" @click="addCart(detailInfo.id)">加购物车</div>-->
               <div class="buySub hvr-shutter-out-horizontal" @click="go(detailInfo.id)">立即预约</div>
             </div>
 
@@ -68,11 +69,10 @@
     <!-- 订单 start -->
     <!-- ========================= -->
     <el-dialog title="提交订单" center :visible.sync="showOrder" width="40%">
-      <span>
 
 
       <div class="addressss">
-         <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
+        <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
           <el-option v-for="item in addressList"
                      :label="item.categoryname + ' ( ' + item.creator + ' ) '"
                      :value="item.id"
@@ -80,38 +80,37 @@
         </el-select>
       </div>
 
-         <div class="block">
-          <el-date-picker
-            v-model="phototime"
-            type="date"
-            placeholder="选择拍摄日期" tyle="width: 500px;text-align: center">
-          </el-date-picker>
-        </div>
+      <div style="margin-top: 20px;">
+        <el-date-picker
+          v-model="phototime"
+          type="date"
+          placeholder="选择拍摄日期" >
+        </el-date-picker>
+      </div>
 
+      <div style="margin-top: 20px;">
+        <el-input
+          type="textarea"
+          :rows="2"
+          placeholder="请写下您的留言"
+          v-model="note" tyle="width: 500px;text-align: center;margin-top: 20px;">
+        </el-input>
+      </div>
 
-      <el-input
-        type="textarea"
-        :rows="4"
-        placeholder="请留下您的留言"
-        v-model="note" tyle="width: 500px;text-align: center">
-      </el-input>
-
-        <!--        <span style="margin-left: 20px;font-size: 18px;font-weight: 600"></span>-->
       <div style="text-align:right;margin-top: 40px">
         金额: <span style="font-size: 26px;color: #5a98de;">{{detailInfo.price + '.00'}}</span> 元
       </div>
 
-        <!--表单-->
-        <div style="display: flex">
-          <el-form style="margin: 40px auto 20px auto;">
-            <el-form-item style="display: flex;justify-content: center">
-              <el-button class="btn2ww2333" type="success" @click="submitOrder" size="small">提交订单</el-button>
-              <el-button style="margin-left: 80px" @click="showOrder = false" size="small">取 消</el-button>
-            </el-form-item>
+      <!--表单-->
+      <div style="display: flex">
+        <el-form style="margin: 40px auto 20px auto;">
+          <el-form-item style="display: flex;justify-content: center">
+            <el-button class="btn2ww2333" type="success" @click="submitOrder" size="small">预约</el-button>
+            <el-button style="margin-left: 80px" @click="showOrder = false" size="small">取 消</el-button>
+          </el-form-item>
         </el-form>
-        </div>
+      </div>
 
-      </span>
     </el-dialog>
 
   </div>
@@ -173,8 +172,8 @@
         // 地址
         addressList: [],
         addressid: '',
-        note:'',
-        phototime:'',
+        note: '',
+        phototime: '',
         ids: [],
       }
     },

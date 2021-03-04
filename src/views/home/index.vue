@@ -22,7 +22,7 @@
                     popper-class="my-autocomplete"
                     v-model="searchText"
                     placeholder="请输入内容"
-                    @keyup.13="handleIconClick">
+                    v-on:keyup.native.13="handleIconClick">
             <i class="el-icon-search el-input__icon a"
                slot="suffix"
                @click="handleIconClick">
@@ -143,10 +143,8 @@
                 <div class="title-item" v-for="item in searchList" :index="item.id">
 
                   <img class="phone-img"
-                       @click="goDetailInfo(item.id)" :src="item.image"
+                       @click="goDetailInfo(item.id)" :src="item.icon"
                        alt="">
-
-                  <div class="phone-title">{{item.title}}</div>
 
                   <div class="phone-feature">{{item.name}}</div>
 

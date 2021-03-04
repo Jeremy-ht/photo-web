@@ -30,13 +30,11 @@
             <div v-if="showList" class="shopping-item" v-for="item in cartList" :index="item.id">
 
               <div style="width: 640px;display: flex">
-<!--                <el-checkbox style="margin: auto" @change="checkboxBox(item.price, item.amount, item.id)"-->
-<!--                             :key="item.id"/>-->
 
-                <img @click="goDetailInfo(item.id)" :src="item.image">
+                <img  @click="goDetailInfo(item.id)" :src="item.icon">
 
-                <div class="name">
-                  {{item.name}}
+                <div class="name" @click="goDetailInfo(item.id)">
+                  {{item.name}} {{ '(' + item.categoryname + '}'}}
                 </div>
               </div>
 
@@ -45,14 +43,11 @@
                 ￥ {{item.price}}
               </div>
 
-              <!--              <div class="count">-->
-              <!--                <el-input-number v-model="item.amount" size="small"-->
-              <!--                                 @change="handleChange(item.amount,item.id)" :min="1"/>-->
-              <!--              </div>-->
+              <div class="count">
+                <i class="el-icon-time"/>{{' ' +item.phototime.substring(0,10)}}
+              </div>
 
-              <!--              <div class="price-count">-->
-              <!--                ￥ {{item.price * item.amount}}-->
-              <!--              </div>-->
+
 
               <div class="delete">
                 <el-link v-if="item.type == 1" @click="goPay(item.id)" type="danger">去支付</el-link>
@@ -62,7 +57,8 @@
 
           </div>
 
-          <div v-if="!showList" style="color: #555555;text-align: center;margin-top: 50px">
+          <div v-if="!showList" style="color: #555555;text-align: center;
+          margin-top: 100px;margin-bottom: 100px">
             订单为空
           </div>
 
@@ -71,50 +67,6 @@
 
       </div>
     </div>
-
-
-    <!-- ========================= -->
-    <!-- 订单 start -->
-    <!-- ========================= -->
-    <el-dialog title="提交订单" center :visible.sync="showOrder" width="40%">
-      <span>
-
-
-      <div class="addressss">
-<!--        <div @click="addressShow(item.id)" class="my-address-item" v-for="item in addressList" :index="item.id">-->
-        <!--                  <div class="uname">{{item.name}}</div>-->
-        <!--                  <div class="phone">{{item.phone}}</div>-->
-        <!--                  <div class="addresss">{{item.address}}</div>-->
-        <!--                </div>-->
-
-        <!--         <span style="margin-left: 10px;font-size: 18px;font-weight: 600">选择地址:</span>-->
-       <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
-          <el-option v-for="item in addressList"
-                     :label="item.name + ' - ' + item.phone + ' - ' + item.address"
-                     :value="item.id"
-                     :key="item.id"/>
-        </el-select>
-
-
-      </div>
-
-        <!--        <span style="margin-left: 20px;font-size: 18px;font-weight: 600"></span>-->
-      <div style="text-align:right;margin-top: 40px">
-        应付总额: <span style="font-size: 26px;color: #5a98de;">{{ totalPrice }} </span> 元
-      </div>
-
-        <!--表单-->
-        <div style="display: flex">
-          <el-form style="margin: 40px auto 20px auto;">
-            <el-form-item style="display: flex;justify-content: center">
-              <el-button class="btn2ww2333" type="success" @click="submitOrder" size="small">提交订单</el-button>
-              <el-button style="margin-left: 80px" @click="showOrder = false" size="small">取 消</el-button>
-            </el-form-item>
-        </el-form>
-        </div>
-
-      </span>
-    </el-dialog>
 
 
   </div>
@@ -215,6 +167,7 @@
         await getCartList(this.UserInfo.id).then(res => {
           if (res.success) {
             this.cartList = res.data.data
+            console.log(this.cartList)
             if (res.data.data.length == 0) {
               this.showList = false
             }
@@ -381,7 +334,7 @@
   .shopping-items {
     width: 1200px;
     height: 100%;
-    margin: 0 auto;
+    margin: 10px auto 100px auto;
     display: flex;
     flex-direction: column;
   }
@@ -389,7 +342,7 @@
   .shopping-item {
     width: 100%;
     height: 80px;
-    border-top: solid 1px #ececec;
+    border-top: solid 1px #d7d7d7;
     display: flex;
     margin-top: 20px;
     padding-top: 14px;
@@ -397,8 +350,9 @@
 
   .shopping-item img {
     width: 60px;
-    height: 60px;
+    height: 70px;
     margin: auto 20px;
+    cursor: pointer;
   }
 
   .shopping-item .name {
@@ -418,16 +372,18 @@
 
   .shopping-item .price {
     margin: auto 0;
-    width: 130px;
+    width: 120px;
     /*color: #ff6700;*/
     text-align: center;
     font-size: 16px;
+    color: red;
   }
 
   .shopping-item .count {
     margin: auto 0;
-    width: 160px;
+    width: 166px;
     text-align: center;
+    font-size: 14px;
   }
 
   .shopping-item .price-count {
@@ -571,7 +527,7 @@
   }
 
   .cart-table-title .operation {
-    width: 130px;
+    width: 230px;
     text-align: center;
   }
 
@@ -586,7 +542,7 @@
   }
 
   .cart-table-title .price1 {
-    width: 130px;
+    width: 150px;
     text-align: center;
   }
 

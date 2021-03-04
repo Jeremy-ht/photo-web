@@ -106,7 +106,7 @@
 
 
     <!--修改密码 -->
-    <el-dialog title="修改密码" :visible.sync="updDialogVisible" width="20%">
+    <el-dialog title="修改密码" :visible.sync="updDialogVisible" width="30%">
       <span>
         <!--表单-->
         <el-form label-width="90px">
@@ -241,15 +241,15 @@
         }
 
 
-        getAddressList(this.UserInfo.id).then(res => {
-          if (res.success) {
-            this.addressList = res.data.data
-            console.log(this.addressList)
-          } else {
-            this.$message({message: res.message, type: 'error', duration: 1700})
-          }
-
-        })
+        // getAddressList(this.UserInfo.id).then(res => {
+        //   if (res.success) {
+        //     this.addressList = res.data.data
+        //     console.log(this.addressList)
+        //   } else {
+        //     this.$message({message: res.message, type: 'error', duration: 1700})
+        //   }
+        //
+        // })
 
       },
 
@@ -301,13 +301,17 @@
           return false
         }
 
-        updPasswordById(id, this.pwd).then(res => {
+        this.pwd.id = id
+
+        updPasswordById( this.pwd).then(res => {
           if (res.success) {
             this.$message({message: '成功修改密码', type: 'success', duration: 1700})
             this.pwd = {
               password: '',
               newPassword: ''
             }
+            window.localStorage.removeItem('UserInfoPhone')
+            this.$router.push({path: '/phone/login'})
 
           } else {
             this.$message({message: res.message, type: 'error', duration: 1700})
