@@ -74,17 +74,31 @@
       <div class="addressss">
          <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
           <el-option v-for="item in addressList"
-                     :label="item.name + ' - ' + item.phone + ' - ' + item.address"
+                     :label="item.categoryname + ' ( ' + item.creator + ' ) '"
                      :value="item.id"
                      :key="item.id"/>
         </el-select>
-
-
       </div>
+
+         <div class="block">
+          <el-date-picker
+            v-model="phototime"
+            type="date"
+            placeholder="选择拍摄日期" tyle="width: 500px;text-align: center">
+          </el-date-picker>
+        </div>
+
+
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="请留下您的留言"
+        v-model="note" tyle="width: 500px;text-align: center">
+      </el-input>
 
         <!--        <span style="margin-left: 20px;font-size: 18px;font-weight: 600"></span>-->
       <div style="text-align:right;margin-top: 40px">
-        应付总额: <span style="font-size: 26px;color: #5a98de;">{{ totalPrice }} </span> 元
+        金额: <span style="font-size: 26px;color: #5a98de;">{{detailInfo.price + '.00'}}</span> 元
       </div>
 
         <!--表单-->
@@ -159,6 +173,8 @@
         // 地址
         addressList: [],
         addressid: '',
+        note:'',
+        phototime:'',
         ids: [],
       }
     },
@@ -213,12 +229,18 @@
           const {href} = this.$router.resolve({path: '/phone/login'})
           window.open(href, '_blank')
         } else {
-          this.totalPrice = this.num * this.detailInfo.price
-          getAddressList(this.UserInfo.id).then(res => {
+
+
+          let params = {
+            pagenum: 1,
+            pagesize: 100
+          }
+
+          getAddressList(params).then(res => {
             if (res.success) {
               this.addressList = res.data.data
             } else {
-              this.$message({message: res.message, type: 'error', duration: 1700})
+              this.$message({message: '获取门店信息失败，请刷新', type: 'error', duration: 1700})
             }
 
           })
@@ -230,26 +252,32 @@
 
       submitOrder() {
         if (this.addressid == 0 || this.addressid == '') {
-          this.$message({message: '请选择地址', type: 'error', duration: 1700})
+          this.$message({message: '请选择门店', type: 'error', duration: 1700})
           return false
         }
 
-        const num = this.num * this.detailInfo.price
+        if (this.phototime == '') {
+          this.$message({message: '请选择拍摄日期', type: 'error', duration: 1700})
+          return false
+        }
+
+        // userid, photoid, addressid, price, note, phototime
         let order = {
           'userid': this.UserInfo.id,
-          'flowerid': this.addressid,
-          'price': num,
-          'name': this.detailId,
-          'phone': this.num,
+          'photoid': this.detailId,
+          'addressid': this.addressid,
+          'price': this.detailInfo.price,
+          'note': this.note,
+          'phototime': this.phototime,
         }
 
         addOrder2(order).then(res => {
           if (res.success) {
-            this.$message({message: '购买成功', type: 'success', duration: 2000})
+            this.$message({message: '提交成功', type: 'success', duration: 2000})
             this.init()
             this.showOrder = false
           } else {
-            this.$message({message: '购买失败，刷新再试', type: 'error', duration: 2000})
+            this.$message({message: '提交失败，请刷新再试', type: 'error', duration: 2000})
 
           }
         })

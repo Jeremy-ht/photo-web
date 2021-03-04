@@ -70,6 +70,7 @@
         getUserList(params).then(res => {
 
           if (res.success) {
+
             this.pageTotal = res.data.pageTotal
             this.userList = res.data.data
           }else {

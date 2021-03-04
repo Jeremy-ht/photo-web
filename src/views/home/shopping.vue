@@ -2,7 +2,8 @@
   <div class="home-container">
 
     <div class="container-item-hr">
-      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1"
+           xmlns="http://www.w3.org/2000/svg"
            p-id="3317" width="200" height="200">
         <path
           d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
@@ -20,8 +21,8 @@
             <div class="name">商品信息</div>
             <div class="price1">单价</div>
             <div class="num">拍摄时间</div>
-<!--            <div class="subtotal">小计</div>-->
-<!--            <div class="operation">操作</div>-->
+            <!--            <div class="subtotal">小计</div>-->
+            <div class="operation">操作</div>
           </div>
 
           <div class="shopping-items">
@@ -29,10 +30,10 @@
             <div v-if="showList" class="shopping-item" v-for="item in cartList" :index="item.id">
 
               <div style="width: 640px;display: flex">
-                <el-checkbox style="margin: auto" @change="checkboxBox(item.price, item.amount, item.id)"
-                             :key="item.id"/>
+<!--                <el-checkbox style="margin: auto" @change="checkboxBox(item.price, item.amount, item.id)"-->
+<!--                             :key="item.id"/>-->
 
-                <img :src="item.image">
+                <img @click="goDetailInfo(item.id)" :src="item.image">
 
                 <div class="name">
                   {{item.name}}
@@ -44,17 +45,18 @@
                 ￥ {{item.price}}
               </div>
 
-              <div class="count">
-                <el-input-number v-model="item.amount" size="small"
-                                 @change="handleChange(item.amount,item.id)" :min="1"/>
-              </div>
+              <!--              <div class="count">-->
+              <!--                <el-input-number v-model="item.amount" size="small"-->
+              <!--                                 @change="handleChange(item.amount,item.id)" :min="1"/>-->
+              <!--              </div>-->
 
-              <div class="price-count">
-                ￥ {{item.price * item.amount}}
-              </div>
+              <!--              <div class="price-count">-->
+              <!--                ￥ {{item.price * item.amount}}-->
+              <!--              </div>-->
 
               <div class="delete">
-                <i class="el-icon-delete" @click="delCart(item.id)"/>
+                <el-link v-if="item.type == 1" @click="goPay(item.id)" type="danger">去支付</el-link>
+                <el-link v-else  type="primary">已支付</el-link>
               </div>
             </div>
 
@@ -64,20 +66,6 @@
             订单为空
           </div>
 
-<!--          <div class="pay">-->
-<!--            <div>-->
-<!--              <span class="total-price"> 应付总额：-->
-<!--                <em id="J_cartTotalPrice">{{totalPrice + ' '}}</em>元-->
-<!--              </span>-->
-<!--            </div>-->
-
-<!--            <div style="margin-left: 40px">-->
-<!--              <el-button class="aaaaa"-->
-<!--                         @click="showOrderGo">现在结算-->
-<!--              </el-button>-->
-<!--            </div>-->
-
-<!--          </div>-->
 
         </div>
 
@@ -99,7 +87,7 @@
         <!--                  <div class="addresss">{{item.address}}</div>-->
         <!--                </div>-->
 
-<!--         <span style="margin-left: 10px;font-size: 18px;font-weight: 600">选择地址:</span>-->
+        <!--         <span style="margin-left: 10px;font-size: 18px;font-weight: 600">选择地址:</span>-->
        <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
           <el-option v-for="item in addressList"
                      :label="item.name + ' - ' + item.phone + ' - ' + item.address"
@@ -191,52 +179,6 @@
         regDialog: false,
         comment: '',
 
-        //表单数据绑定
-        loginForm: {
-          username: '',
-          password: ''
-        },
-        //表单验证
-        loginFormRules: {
-          username:
-            [
-              {required: true, message: '请输入用户名', trigger: 'blur'},
-              {min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur'}
-            ],
-          password:
-            [
-              {required: true, message: '请输入密码', trigger: 'blur'},
-              {min: 3, max: 16, message: '长度在 3 到 16 个字符', trigger: 'blur'}
-            ]
-        },
-
-        // 注册表单
-        registerForm: {
-          uname: '',
-          pwd: '',
-          sex: '1',
-          phone: '',
-          email: ''
-        },
-
-        //表单验证
-        loginFormRules2: {
-          uname:
-            [
-              {required: true, message: '请输入用户名', trigger: 'blur'},
-              {min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur'}
-            ],
-          pwd:
-            [
-              {required: true, message: '请输入密码', trigger: 'blur'},
-              {min: 3, max: 16, message: '长度在 3 到 16 个字符', trigger: 'blur'}
-            ],
-          phone: [
-            {required: true, message: '请输入手机号', trigger: 'blur'},
-            {validator: checkMobile, trigger: 'blur'}
-          ]
-        },
-
         // 购物车
         checked: false,
         num: 1,
@@ -266,10 +208,8 @@
         // 是否登录
         if (!this.loginIs()) {
           this.$message({message: '请先登录', type: 'error', duration: 1700})
-          adminInfo
+          this.$router.push({path: `/phone/login`})
           return false
-        } else {
-
         }
 
         await getCartList(this.UserInfo.id).then(res => {
@@ -278,17 +218,7 @@
             if (res.data.data.length == 0) {
               this.showList = false
             }
-            console.log(this.cateList)
           }
-        })
-
-        getAddressList(this.UserInfo.id).then(res => {
-          if (res.success) {
-            this.addressList = res.data.data
-          } else {
-            this.$message({message: res.message, type: 'error', duration: 1700})
-          }
-
         })
 
       },
@@ -337,49 +267,19 @@
         this.$router.push({path: `/phone/home`})
       },
 
-
-      // 购物车
-      goShopping() {
-        // 是否登录
-        if (!this.loginIs()) {
-          this.$message({message: '请先登录', type: 'error', duration: 1700})
-          return false
-        }
-
-        const {href} = this.$router.resolve({path: '/flower/shopping'})
-        window.open(href, '_blank')
+      // 去支付
+      goPay() {
+        // this.$router.push({path: `/phone/home`})
       },
 
-      // 计数器
-      handleChange(value, id) {
-        updAmount(this.UserInfo.id, id, value).then(res => {
-          if (res.success) {
-            this.init()
-          }
-
-        })
-
-      },
 
       // 去详情页
-      goDetailInfo(categoryid, id) {
-        const {href} = this.$router.resolve({path: `/scenery/sceneryInfo/${categoryid}/${id}`})
+      goDetailInfo(id) {
+        const {href} = this.$router.resolve({path: `/phone/show/${id}`})
         window.open(href, '_blank')
 
       },
 
-
-      // 提交订单
-      showOrderGo() {
-
-        if (this.totalPrice == 0) {
-          this.$message({message: '请挑选需要结算的商品', type: 'error', duration: 1700})
-          return
-        }
-
-        this.showOrder = true
-
-      },
       submitOrder() {
         if (this.addressid == 0 || this.addressid == '') {
           this.$message({message: '请选择地址', type: 'error', duration: 1700})
@@ -451,12 +351,6 @@
         this.totalPrice += price * amount
       },
 
-      // 重置添加用户表单
-      closeAddAdminForm() {
-        // this.$refs.loginFormRules2.resetFields()
-        // this.$refs.loginFormRules.resetFields()
-
-      }
 
     }
   }

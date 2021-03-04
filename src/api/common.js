@@ -371,10 +371,11 @@ export function addAddress(address) {
   })
 }
 
-export function getAddressList(id) {
+export function getAddressList(param) {
   return request({
-    url: `/address/getAddressList/${id}`,
-    method: 'get'
+    url: `/category/getCategoryList`,
+    method: 'post',
+    data: param
   })
 }
 
@@ -391,8 +392,9 @@ export function addCart(cart) {
 
 export function getCartList(id) {
   return request({
-    url: `/cart/getCartList/${id}`,
-    method: 'get'
+    url: `/order/getOrderById`,
+    method: 'post',
+    data: {'userid': id}
   })
 }
 
@@ -430,7 +432,7 @@ export function addOrder(order) {
 
 export function addOrder2(order) {
   return request({
-    url: `/orders/addOrder2`,
+    url: `/order/addOrder`,
     method: 'post',
     data: order
   })
