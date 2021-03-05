@@ -342,14 +342,14 @@ export function getEchartsCategory() {
 export function getEchartsOrder() {
   return request({
     url: `/orders/getEchartsOrder`,
-    method: 'get'
+    method: 'post'
   })
 }
 
 export function getEchartsCate() {
   return request({
     url: `/orders/getEchartsCate`,
-    method: 'get'
+    method: 'post'
   })
 }
 
@@ -414,8 +414,9 @@ export function updAmount(uid, id, value) {
 
 export function getShoppingNum(id) {
   return request({
-    url: `/cart/getShoppingNum/${id}`,
-    method: 'get'
+    url: `/cart/getShoppingNum`,
+    method: 'post',
+    data: {'userid': id}
   })
 }
 

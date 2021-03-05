@@ -8,14 +8,13 @@
 
 <script>
   import * as echart from 'echarts'
-  import { getEchartsCategory, getEchartsOrder } from '../../api/common'
+  import {getEchartsCategory, getEchartsOrder} from '../../api/common'
 
   export default {
     name: 'chart',
     data() {
       return {
         charts: '',
-        opinion: ['男', '女'],
         opinionData: []
       }
     },
@@ -37,7 +36,7 @@
         myChart.setOption(
           {
             title: {
-              text: '月交易信息一览(2021)',
+              text: '月订单信息一览(2021)',
               left: 'left',
               top: 20,
               textStyle: {
@@ -46,15 +45,15 @@
             },
             xAxis: {
               type: 'category',
-              data:['1月', '2月', '3月', '4月', '5月', '6月', '7月',
-                '8月', '9月','10月', '11月', '12月']
+              data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月',
+                '8月', '9月', '10月', '11月', '12月']
             },
             yAxis: {
               type: 'value',
               boundaryGap: [0, 1]
             },
             series: [{
-              data:this.opinionData,
+              data: this.opinionData,
               type: 'bar'
             }]
 

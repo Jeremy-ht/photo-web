@@ -22,7 +22,7 @@
 
       <el-form-item label="封面图">
         <el-upload class="avatar-uploader"
-                   action="http://127.0.0.1:9000/upload/updataFile"
+                   action="/upload/headImage"
                    :show-file-list="false"
                    :on-success="handleAvatarSuccess">
           <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
@@ -218,7 +218,8 @@
       // 封面上传成功
       handleAvatarSuccess(res, file) {
         if (res.success) {
-          this.addDetail.icon = res.data.location
+          console.log(res)
+          // this.addDetail.icon = res.data.location
         } else {
           this.$message({message: '封面上传失败，请重新上传', type: 'error', duration: 1700})
         }

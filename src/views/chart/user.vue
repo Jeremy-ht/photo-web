@@ -25,7 +25,6 @@
       async initEcharts() {
         await getEchartsCate().then(res => {
           if (res.success) {
-            console.log(res.data.data)
             this.opinionData = []
             this.opinionData = res.data.data
           }
@@ -37,7 +36,7 @@
 
           {
             title: {
-              text: '手机上架数量图',
+              text: '2021年各门店销售额',
               left: 'center',top: 20,
               textStyle: {
                 color: '#5a98de'
@@ -52,7 +51,7 @@
             },
             series: [
               {
-                name: '数量',
+                name: '金额',
                 type: 'pie',
                 radius: '50%',
                 data:  this.opinionData,

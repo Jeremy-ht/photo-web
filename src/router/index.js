@@ -3,10 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-//  #5a98de;
-//  #c62b26;
-
-/* Layout */
 import Layout from '@/layout'
 
 export const constantRoutes = [
@@ -40,26 +36,26 @@ export const constantRoutes = [
   {
     path: '/phone/home',
     hidden: true,
-    name: '云购手机',
+    name: 'BLUE 拍照平台',
     component: () => import('@/views/home/index'),
-    meta: { title: '云购手机' }
+    meta: { title: 'BLUE 拍照平台' }
   },
 
   {
     path:  '/phone/shopping',
     hidden: true,
-    name: '云购手机购物车',
+    name: '拍照平台购物车',
     component: () => import('@/views/home/shopping'),
-    meta: { title: '云购手机购物车' }
+    meta: { title: '拍照平台购物车' }
   },
 
   // 注册
   {
     path: '/phone/my',
     hidden: true,
-    name: '云购手机个人中心',
+    name: '拍照平台个人中心',
     component: () => import('@/views/home/person'),
-    meta: { title: '云购手机个人中心' }
+    meta: { title: '拍照平台个人中心' }
   },
 
   // login
@@ -76,9 +72,9 @@ export const constantRoutes = [
   {
     path: '/phone/show/:id',
     hidden: true,
-    name: '手机详情',
+    name: '详情',
     component: () => import('@/views/home/sceneryInfo'),
-    meta: { title: '手机详情' }
+    meta: { title: '详情' }
   },
 
   /**
@@ -135,18 +131,18 @@ export const constantRoutes = [
   },
 
 
-  {
-    path: '/one',
-    component: Layout,
-    children: [
-      {
-        path: 'four',
-        name: '首页管理',
-        component: () => import('@/views/scenery/four'),
-        meta: { title: '首页管理', icon: 'el-icon-s-claim' }
-      }
-    ]
-  },
+  // {
+  //   path: '/one',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'four',
+  //       name: '首页管理',
+  //       component: () => import('@/views/scenery/four'),
+  //       meta: { title: '首页管理', icon: 'el-icon-s-claim' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/admin',
@@ -211,21 +207,21 @@ export const constantRoutes = [
     path: '/chart',
     component: Layout,
     redirect: '/chart/cate',
-    name: '数据展示',
-    meta: { title: '数据展示', icon: 'el-icon-s-marketing' },
+    name: '数据统计',
+    meta: { title: '数据统计', icon: 'el-icon-s-marketing' },
     children: [
       {
         path: 'cate',
-        name: '品牌统计',
+        name: '销售统计',
         component: () => import('@/views/chart/user'),
-        meta: { title: '品牌统计', icon: 'table' }
+        meta: { title: '销售统计', icon: 'table' }
       }
-      // , {
-      //   path: 'order',
-      //   name: '交易统计',
-      //   component: () => import('@/views/chart/chart'),
-      //   meta: { title: '交易统计', icon: 'table' }
-      // }
+      , {
+        path: 'order',
+        name: '订单统计',
+        component: () => import('@/views/chart/chart'),
+        meta: { title: '订单统计', icon: 'table' }
+      }
     ]
   },
 
@@ -233,7 +229,6 @@ export const constantRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   mode: 'history',
   routes: constantRoutes

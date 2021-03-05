@@ -6,12 +6,18 @@
         <el-table :data="orderList" stripe style="width: 100%; margin-top: 10px" border size="small">
           <el-table-column label="#" type="index" align="center"/>
           <el-table-column label="下单人" prop="uname" align="center"/>
-          <el-table-column label="头像" prop="image" align="center">
+<!--          <el-table-column label="头像" prop="image" align="center">-->
+<!--            <template slot-scope="scope">-->
+<!--              <img :src="scope.row.image" :alt="scope.row.uname" style="width: 30px;height: 30px">-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+          <el-table-column label="下单联系方式" prop="uphone" align="center"/>
+          <el-table-column label="拍摄时间" width="170px">
             <template slot-scope="scope">
-              <img :src="scope.row.image" :alt="scope.row.uname" style="width: 30px;height: 30px">
+              <i class="el-icon-time"/>
+              <span style="margin-left: 10px">{{ scope.row.phototime }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="下单联系方式" prop="uphone" align="center"/>
           <el-table-column label="收件人" prop="name" align="center"/>
           <el-table-column label="联系方式" prop="phone" align="center"/>
           <el-table-column label="地址" prop="address" align="center" />

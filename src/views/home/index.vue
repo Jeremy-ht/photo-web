@@ -6,7 +6,8 @@
       <div class="header-item">
 
         <div class="header-item-icon">
-          <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1"
+               xmlns="http://www.w3.org/2000/svg"
                p-id="3317" width="200" height="200">
             <path
               d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
@@ -38,8 +39,6 @@
 
           <div class="header-item-person-icon">
             <i @click="goLoginTo" class="el-icon-user-solid"/>
-            <!--            <i v-if="showLogin"  @click="goLoginTo"  class="el-icon-user-solid"/>-->
-            <!--            <i v-else @click="goLogin" class="el-icon-user-solid"/>-->
           </div>
 
           <div class="header-item-person-shop">
@@ -173,26 +172,12 @@
 </template>
 
 <script>
-  import {
-    fourList,
-    getCategoryList, getUserList, getSceneryIndex, getShoppingNum,
-    getSceneryList, getrotationList, updUserInfo, getSearchContent, adminLogin, userLogin, addUser, getSceneryListByCate
-  } from '../../api/common'
+  import {getShoppingNum, getSceneryList, getSearchContent} from '../../api/common'
   import '../../assets/iconfont/iconfont'
 
   export default {
     name: 'index',
     data() {
-
-      // 验证手机号的规则
-      let checkMobile = (rule, value, cb) => {
-        // 验证手机号的正则表达式
-        const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
-        if (regMobile.test(value)) {
-          return cb()
-        }
-        cb(new Error('请输入合法的手机号'))
-      }
 
       return {
         activeIndex: '0',
@@ -218,7 +203,7 @@
         categoryname: '',
 
         isActive: false,
-        // flower
+
         loginDialog: false,
         regDialog: false,
         comment: '',
@@ -228,7 +213,7 @@
         showShopping: false,
         shoppingNum: 0,
 
-        // phone
+
         searchText: '',
         showLists: [],
         cate: [],
@@ -249,22 +234,22 @@
         if (!this.loginIs()) {
           this.showLogin = false
         } else {
-          // // 购物车商品数量
-          // await getShoppingNum(this.UserInfo.id).then(res => {
-          //   if (res.success) {
-          //     this.shoppingNum = res.data.data
-          //
-          //   } else {
-          //     this.$message({
-          //       message: '数据获取失败，请刷新重试',
-          //       type: 'error', duration: 2000
-          //     })
-          //   }
-          // })
+          // 购物车商品数量
+          await getShoppingNum(this.UserInfo.id).then(res => {
+            if (res.success) {
+              this.shoppingNum = res.data.data
+
+            } else {
+              this.$message({
+                message: '数据获取失败，请刷新重试',
+                type: 'error', duration: 2000
+              })
+            }
+          })
           this.showLogin = true
         }
 
-        this.allShop()
+        await this.allShop()
       },
 
       // 全部商品
@@ -302,28 +287,6 @@
 
       },
 
-      getcateList(key) {
-
-        let params = {
-          pagenum: 1,
-          pagesize: 100
-        }
-
-        getSceneryList(params, key).then(res => {
-          console.log(res)
-          if (res.success) {
-            this.otherList = []
-            this.otherList = res.data.data
-
-          } else {
-            this.$message({
-              message: '数据获取失败,请刷新!',
-              type: 'error', duration: 2000
-            })
-          }
-        })
-
-      },
 
       async handleIconClick() {
 
@@ -368,7 +331,6 @@
       goLoginTo() {
         // 是否登录
         if (!this.loginIs()) {
-          // this.$message({ message: '请先登录', type: 'error', duration: 1700 })
           this.goLogin()
           return false
         }
@@ -378,11 +340,11 @@
 
       // 购物车
       goShopping() {
-        // // 是否登录
-        // if (!this.loginIs()) {
-        //   this.$message({ message: '请先登录', type: 'error', duration: 1700 })
-        //   return false
-        // }
+        // 是否登录
+        if (!this.loginIs()) {
+          this.$message({ message: '请先登录', type: 'error', duration: 1700 })
+          return false
+        }
 
         const {href} = this.$router.resolve({path: '/phone/shopping'})
         window.open(href, '_blank')
@@ -392,51 +354,6 @@
       goDetailInfo(id) {
         const {href} = this.$router.resolve({path: `/phone/show/${id}`})
         window.open(href, '_blank')
-
-      },
-
-      handleCommand(command) {
-        if (command == 1) {
-          // 个人中心
-          this.showIndex = 3
-          this.activeIndex = '-1'
-
-        } else {
-          // 退出
-          window.localStorage.removeItem('UserInfo')
-          this.UserInfo = {
-            uname: '',
-            image: '',
-            phone: '',
-            creatime: '',
-            email: '',
-            id: 0,
-            loginway: 0,
-            sex: '1'
-          }
-          this.activeIndex = '0'
-          this.showIndex = 1
-          this.init()
-        }
-
-      },
-      layoutLogin() {
-        console.log(1)
-        window.localStorage.removeItem('UserInfoPhone')
-        console.log(1)
-        this.init()
-      },
-
-      // 封面上传成功
-      handleAvatarSuccess(res, file) {
-        if (res.success) {
-          this.UserInfo.image = res.data.location
-          window.localStorage.removeItem('UserInfo')
-          window.localStorage.setItem('UserInfo', JSON.stringify(this.UserInfo))
-          this.UserInfo = JSON.parse(window.localStorage.getItem('UserInfo'))
-        } else {
-          this.$message({message: '头像上传失败，请重新上传', type: 'error', duration: 1700})
-        }
 
       },
 
