@@ -442,8 +442,8 @@ export function addOrder2(order) {
 export function getOrderList(params) {
   return request({
     url: `/orders/getOrderList`,
-    method: 'get',
-    params
+    method: 'post',
+    data: params
   })
 }
 

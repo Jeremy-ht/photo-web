@@ -26,8 +26,8 @@
       async initEcharts() {
         await getEchartsOrder().then(res => {
           if (res.success) {
-            this.opinionData = []
             this.opinionData = res.data.data
+            console.log(this.opinionData)
           }
         })
 
@@ -36,11 +36,10 @@
         myChart.setOption(
           {
             title: {
-              text: '月订单信息一览(2021)',
+              text: '2021年度月总销售订单',
               left: 'left',
-              top: 20,
               textStyle: {
-                color: '#5a98de'
+                color: '#FF8040'
               }
             },
             xAxis: {

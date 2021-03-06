@@ -1,17 +1,16 @@
 <template>
   <div class="container">
     <div id="main" style="width:800px;height: 540px;">
-
     </div>
   </div>
 </template>
 
 <script>
   import * as echart from 'echarts'
-  import { getEchartsOrder} from '../../api/common'
+  import {getEchartsCategory, getEchartsOrder} from '../../api/common'
 
   export default {
-    name: 'Dashboard',
+    name: 'dashboard',
     data() {
       return {
         charts: '',
@@ -36,11 +35,10 @@
         myChart.setOption(
           {
             title: {
-              text: '月订单信息一览(2021)',
+              text: '2021年度月总销售订单',
               left: 'left',
-              top: 20,
               textStyle: {
-                color: '#5a98de'
+                color: '#FF8040'
               }
             },
             xAxis: {

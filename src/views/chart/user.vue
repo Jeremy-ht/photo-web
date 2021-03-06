@@ -8,7 +8,7 @@
 
 <script>
   import * as echart from 'echarts'
-  import { getEchartsUser, getEchartsCate } from '../../api/common'
+  import {getEchartsUser, getEchartsCate} from '../../api/common'
 
   export default {
     name: 'chart',
@@ -25,21 +25,20 @@
       async initEcharts() {
         await getEchartsCate().then(res => {
           if (res.success) {
-            this.opinionData = []
             this.opinionData = res.data.data
+            console.log(this.opinionData)
           }
         })
 
         let myChart = echart.init(document.getElementById('main'))
         // 绘制图表
         myChart.setOption(
-
           {
             title: {
-              text: '2021年各门店销售额',
-              left: 'center',top: 20,
+              text: '2021年度各门店销售额',
+              left: 'center',
               textStyle: {
-                color: '#5a98de'
+                color: '#FF8040'
               }
             },
             tooltip: {
@@ -51,10 +50,10 @@
             },
             series: [
               {
-                name: '金额',
+                name: '销售额',
                 type: 'pie',
                 radius: '50%',
-                data:  this.opinionData,
+                data: this.opinionData,
                 emphasis: {
                   itemStyle: {
                     shadowBlur: 10,
@@ -65,8 +64,6 @@
               }
             ]
           }
-
-
         )
       }
     }
