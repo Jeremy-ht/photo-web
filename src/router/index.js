@@ -83,7 +83,7 @@ export const constantRoutes = [
   {
     path: '/phone',
     component: Layout,
-    redirect: '/phone/list',
+    redirect: '/phone/show',
     name: '照片管理',
     meta: { title: '照片管理', icon: 'el-icon-s-cooperation' },
     children: [
@@ -193,7 +193,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'orderList',
+        path: 'orders',
         name: '订单列表',
         component: () => import('@/views/comment/orders'),
         meta: { title: '订单列表', icon: 'el-icon-s-comment' }
