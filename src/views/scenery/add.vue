@@ -234,10 +234,7 @@
       // oss 上传文件
       uploadHttp({file}) {
         let client = {
-          accessKeyId: 'LTAI4FtGxtVnUgLkq3aQubck',
-          accessKeySecret: 'T7clyfq6jSUHTCm9ysmC2Qf9Mn5Y8x',
-          bucket: 'zaixian-edu',
-          region: 'oss-cn-hangbei'
+
         }
 
 
