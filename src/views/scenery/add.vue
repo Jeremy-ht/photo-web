@@ -21,10 +21,25 @@
       </el-form-item>
 
       <el-form-item label="封面图">
-        <el-upload class="avatar-uploader"
-                   action="/upload/headImage"
-                   :show-file-list="false"
-                   :on-success="handleAvatarSuccess">
+        <!--        <el-upload class="avatar-uploader"-->
+        <!--                   action="/upload/headImage"-->
+        <!--                   :show-file-list="false"-->
+        <!--                   :on-success="handleAvatarSuccess">-->
+        <!--          <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">-->
+        <!--          <i v-else class="el-icon-plus avatar-uploader-icon"/>-->
+        <!--        </el-upload>-->
+
+        <el-upload
+          class="avatar-uploader"
+          action=""
+          :drag="true"
+          :show-file-list="false"
+          :multiple="true"
+          :http-request="uploadHttp"
+          :before-upload="beforeAvatarUpload"
+          :on-success="handleAvatarSuccess"
+          list-type="picture">
+
           <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"/>
         </el-upload>
@@ -47,6 +62,7 @@
 
 <script>
   import {getCategoryList, uploadFile, addScenery} from '../../api/common'
+  import OSS from 'ali-oss';
   import '../../assets/iconfont/iconfont'
   import Editor from '@tinymce/tinymce-vue'
 
@@ -214,6 +230,39 @@
           time: '',
         }
       },
+
+      // oss 上传文件
+      uploadHttp({file}) {
+        let client = {
+          accessKeyId: 'LTAI4FtGxtVnUgLkq3aQubck',
+          accessKeySecret: 'T7clyfq6jSUHTCm9ysmC2Qf9Mn5Y8x',
+          bucket: 'zaixian-edu',
+          region: 'oss-cn-hangbei'
+        }
+
+
+
+        const {imgName} = 'ALIOSS_IMG_';
+        const fileName = `${imgName}/${Date.parse(new Date())}`;  //定义唯一的文件名
+        OSS(client).put(fileName, file, {
+          'ContentType': 'image/jpeg'
+        }).then(({res, url, name}) => {
+          if (res && res.status == 200) {
+            console.log(`阿里云OSS上传图片成功回调`, res, url, name);
+          }
+        }).catch((err) => {
+          console.log(`阿里云OSS上传图片失败回调`, err);
+        });
+      },
+
+      beforeAvatarUpload() {
+
+      },
+
+      handleRemove() {
+
+      },
+
 
       // 封面上传成功
       handleAvatarSuccess(res, file) {
