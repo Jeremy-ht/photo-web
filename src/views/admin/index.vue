@@ -9,9 +9,9 @@
         <el-table-column label="#" type="index" align="center"/>
         <el-table-column label="员工用户名" prop="username" align="center" />
         <el-table-column label="姓名" prop="name" align="center" />
-        <el-table-column label="联系方式" prop="phone" align="center" width="130px"/>
+        <el-table-column label="联系方式" prop="phone" align="center"  />
 
-        <el-table-column label="账号创建时间" align="center" width="170px">
+        <el-table-column label="账号创建时间" align="center"  >
           <template slot-scope="scope">
             <i class="el-icon-time"/>
             <span style="margin-left: 10px">{{ scope.row.creatime }}</span>

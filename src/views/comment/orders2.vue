@@ -34,21 +34,10 @@
 
         <el-table-column label="支付状态" prop="type" align="center">
           <template slot-scope="scope">
-            <span v-if="scope.row.type === 1"><el-tag type="danger">未支付</el-tag></span>
-            <span v-else-if="scope.row.type === 2"><el-tag type="info">已支付</el-tag></span>
-
-            <span v-else-if="scope.row.state === 0"><el-tag type="warning">未评论</el-tag></span>
-            <span v-else-if="scope.row.state === 1"><el-tag type="info">已评论</el-tag></span>
+            <span><el-tag type="danger">未支付</el-tag></span>
           </template>
         </el-table-column>
 
-
-        <el-table-column label="订单评论状态" prop="type" align="center">
-          <template slot-scope="scope">
-            <span v-if="scope.row.state === 0"><el-tag type="warning">未评论</el-tag></span>
-            <span v-else-if="scope.row.state === 1"><el-tag type="info">已评论</el-tag></span>
-          </template>
-        </el-table-column>
 
       </el-table>
 
@@ -67,7 +56,7 @@
   import PageBar from '@/components/PageBar'
 
   export default {
-    name: 'orders',
+    name: 'orders2',
     data() {
       return {
         // 分页查询
@@ -102,7 +91,7 @@
             // this.orderList = res.data.data
 
             this.orderList = res.data.data.filter(
-              item => item.type === 2
+              item => item.type === 1
             )
 
             this.pageTotal = this.orderList.length

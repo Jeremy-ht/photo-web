@@ -104,30 +104,6 @@ export function updCategory(params) {
   })
 }
 
-/**
- * comment
- */
-export function getCommentList(pagenum = 1, pagesize = 10, detailId = 0) {
-  return request({
-    url: `/comment/getCommentList/${pagenum}/${pagesize}/${detailId}`,
-    method: 'get'
-  })
-}
-
-export function disableComment(id, state) {
-  return request({
-    url: `/comment/disableComment/${id}/${state}`,
-    method: 'get'
-  })
-}
-
-export function addComment(params) {
-  return request({
-    url: `/comment/addComment`,
-    method: 'post',
-    data: params
-  })
-}
 
 /**
  * log
@@ -286,9 +262,9 @@ export function updPasswordByIdadmin(id, params) {
 /**
  * uploadFile
  */
-export function uploadFile() {
+export function uploadFile(params) {
   return request({
-    url: `/upload/updataFile`,
+    url: `http://8.136.218.79:8080/upload/updataFile`,
     method: 'post',
     data: params
   })
@@ -454,5 +430,49 @@ export function getUsers() {
   return request({
     url: `/users/getUsers`,
     method: 'post'
+  })
+}
+
+
+/**
+ * comment
+ */
+export function getCommentList(pagenum = 1, pagesize = 100, detailId = 0) {
+  return request({
+    url: `/comment/getCommentList`,
+    method: 'post',
+    data: {
+      pagenum: pagenum,
+      pagesize: pagesize,
+      detailId: detailId
+    }
+  })
+}
+
+export function disableComment(id, state) {
+  return request({
+    url: `/comment/disableComment`,
+    method: 'post',
+    data: {
+      id: id,
+      state: state
+    }
+  })
+}
+export function updOrder(id) {
+  return request({
+    url: `/order/updOrder`,
+    method: 'post',
+    data: {
+      id: id
+    }
+  })
+}
+
+export function addComment(params) {
+  return request({
+    url: `/comment/addComment`,
+    method: 'post',
+    data: params
   })
 }

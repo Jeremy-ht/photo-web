@@ -7,7 +7,7 @@
            p-id="3317" width="200" height="200">
         <path
           d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
-          fill="#FF8040" opacity=".939" p-id="3318"></path>
+          fill="#5a98de" opacity=".939" p-id="3318"></path>
       </svg>
     </div>
 
@@ -31,9 +31,9 @@
 
               <div style="width: 640px;display: flex">
 
-                <img  @click="goDetailInfo(item.id)" :src="item.icon">
+                <img @click="goDetailInfo(item.photoid)" :src="item.icon">
 
-                <div class="name" @click="goDetailInfo(item.id)">
+                <div class="name" @click="goDetailInfo(item.photoid)">
                   {{item.name}} {{ '(' + item.categoryname + '}'}}
                 </div>
               </div>
@@ -48,10 +48,17 @@
               </div>
 
 
-
               <div class="delete">
-                <el-link v-if="item.type == 1" @click="goPay(item.id)" type="danger">去支付</el-link>
-                <el-link v-else  type="primary">已支付</el-link>
+
+                <el-link v-if="item.state == '' ||item.state == 0 || item.state == null ||item.state == undefined "
+                         @click="commentG(item.photoid, item.type, item.orderid)" type="danger" style="margin-right: 12px">评论
+                </el-link>
+                <el-link v-if="item.state == 1" type="primary" style="margin-right: 12px">已评论</el-link>
+
+
+                <el-link v-if="item.type == 1" @click="goPay(item.orderid)" type="danger">去支付</el-link>
+
+                <el-link v-else type="primary">已支付</el-link>
               </div>
             </div>
 
@@ -69,12 +76,34 @@
     </div>
 
 
+    <el-dialog title="评论" :visible.sync="showComment" width="40%" @close="closeAddAdminForm()">
+      <span>
+        <!--表单-->
+        <el-form>
+          <el-form-item>
+            <el-input
+              type="textarea"
+              rows="4"
+              maxlength="500"
+              placeholder="请输入评论内容"
+              v-model="comment"/>
+          </el-form-item>
+        </el-form>
+      </span>
+
+      <!--底部区域-->
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="addComment" size="mini">确 定</el-button>
+        <el-button @click="showComment = false" size="mini">取 消</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
   import {
-    delCart, getCartList, updAmount, getAddressList, getSceneryList, addOrder
+    delCart, getCartList, addComment, updOrder, getSceneryList, addOrder, disableComment
   } from '../../api/common'
   import '../../assets/iconfont/iconfont'
 
@@ -82,31 +111,11 @@
     name: 'shopping',
     data() {
 
-      // 验证手机号的规则
-      let checkMobile = (rule, value, cb) => {
-        // 验证手机号的正则表达式
-        const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
-        if (regMobile.test(value)) {
-          return cb()
-        }
-        cb(new Error('请输入合法的手机号'))
-      }
-
-      // 验证邮箱的规则
-      let checkEmail = (rule, value, cb) => {
-        // 验证邮箱的正则表达式
-        const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-        if (regEmail.test(value)) {
-          // 合法的邮箱
-          return cb()
-        }
-        cb(new Error('请输入合法的邮箱'))
-      }
-
       return {
         activeIndex: '0',
         search: '',
         showLogin: false,
+        showComment: false,
 
         UserInfo: {
           uname: '',
@@ -145,7 +154,9 @@
         // 地址
         addressList: [],
         addressid: '',
-        shoppingNum: 0
+        shoppingNum: 0,
+        orderid: 0,
+        commentId: 0
 
       }
     },
@@ -160,7 +171,7 @@
         // 是否登录
         if (!this.loginIs()) {
           this.$message({message: '请先登录', type: 'error', duration: 1700})
-          this.$router.push({path: `/phone/login`})
+          this.$router.push({path: `/pass/login`})
           return false
         }
 
@@ -215,20 +226,74 @@
 
       },
 
+      commentG(id, type, orderid) {
+        if (type === 1) {
+          this.$message({message: '订单未支付', type: 'error', duration: 1700})
+          return
+        }
+        this.comment = ''
+        this.commentId = id
+        this.orderid = orderid
+        this.showComment = true
+
+      },
+      // 重置添加用户表单
+      closeAddAdminForm() {
+
+      },
+      addComment() {
+        let addCommentInfo = {
+          userid: this.UserInfo.id,
+          infoid: this.commentId,
+          commentary: this.comment,
+          orderid: this.orderid
+
+        }
+        addComment(addCommentInfo).then(res => {
+          if (res.success) {
+            this.$message({message: '评论成功', type: 'success', duration: 1700})
+            this.showComment = false
+            this.init()
+          } else {
+            this.$message({message: '评论失败', type: 'error', duration: 1700})
+          }
+        })
+
+
+      },
+
       // 去首页
       goHome() {
-        this.$router.push({path: `/phone/home`})
+        this.$router.push({path: `/home`})
       },
 
       // 去支付
-      goPay() {
-        // this.$router.push({path: `/phone/home`})
+      goPay(id) {
+        // this.$router.push({path: `/home`})
+        this.$confirm(`确定支付吗?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+
+          // this.$message({message: '支付成功', type: 'success', duration: 1700})
+
+          updOrder(id).then(res => {
+            if (res.success) {
+              this.init()
+              this.$message({message: '支付成功', type: 'success', duration: 1700})
+            } else {
+              this.$message({message: '失败，请刷新', type: 'error', duration: 1700})
+            }
+          })
+        })
+
       },
 
 
       // 去详情页
       goDetailInfo(id) {
-        const {href} = this.$router.resolve({path: `/phone/show/${id}`})
+        const {href} = this.$router.resolve({path: `/show/${id}`})
         window.open(href, '_blank')
 
       },

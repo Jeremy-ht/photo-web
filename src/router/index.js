@@ -34,7 +34,7 @@ export const constantRoutes = [
    */
   // 用户首页
   {
-    path: '/phone/home',
+    path: '/home',
     hidden: true,
     name: 'BLUE 拍照平台',
     component: () => import('@/views/home/index'),
@@ -42,7 +42,7 @@ export const constantRoutes = [
   },
 
   {
-    path:  '/phone/shopping',
+    path:  '/shopping',
     hidden: true,
     name: '拍照平台购物车',
     component: () => import('@/views/home/shopping'),
@@ -60,7 +60,7 @@ export const constantRoutes = [
 
   // login
   {
-    path: '/phone/login',
+    path: '/pass/login',
     hidden: true,
     name: '拍照平台登录',
     component: () => import('@/views/home/userLogin'),
@@ -70,11 +70,37 @@ export const constantRoutes = [
 
   // 详情
   {
-    path: '/phone/show/:id',
+    path: '/show/:id',
     hidden: true,
     name: '详情',
     component: () => import('@/views/home/sceneryInfo'),
     meta: { title: '详情' }
+  },
+
+  {
+    path: '/admin',
+    component: Layout,
+    children: [
+      {
+        path: 'admin',
+        name: '员工列表',
+        component: () => import('@/views/admin/index'),
+        meta: { title: '员工列表', icon: 'el-icon-s-claim' }
+      }
+    ]
+  },
+
+  {
+    path: '/user',
+    component: Layout,
+    children: [
+      {
+        path: 'user',
+        name: '用户列表',
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户列表', icon: 'table' }
+      }
+    ]
   },
 
   /**
@@ -83,7 +109,7 @@ export const constantRoutes = [
   {
     path: '/phone',
     component: Layout,
-    redirect: '/phone/show',
+    redirect: '/show',
     name: '照片管理',
     meta: { title: '照片管理', icon: 'el-icon-s-cooperation' },
     children: [
@@ -144,54 +170,46 @@ export const constantRoutes = [
   //   ]
   // },
 
-  {
-    path: '/admin',
-    component: Layout,
-    children: [
-      {
-        path: 'admin',
-        name: '员工列表',
-        component: () => import('@/views/admin/index'),
-        meta: { title: '员工列表', icon: 'el-icon-s-claim' }
-      }
-    ]
-  },
 
-  {
-    path: '/user',
-    component: Layout,
-    children: [
-      {
-        path: 'user',
-        name: '用户列表',
-        component: () => import('@/views/user/index'),
-        meta: { title: '用户列表', icon: 'table' }
-      }
-    ]
-  },
 
 
   /**
    *  评论
    */
-  // {
-  //   path: '/comment',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'commentList',
-  //       name: '评论列表',
-  //       component: () => import('@/views/comment/commentList'),
-  //       meta: { title: '评论列表', icon: 'el-icon-s-comment' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/comment',
+    component: Layout,
+    name: '评论管理',
+    meta: { title: '评论管理', icon: 'el-icon-s-marketing' },
+    children: [
+      {
+        path: 'commentWait',
+        name: '评论审核',
+        component: () => import('@/views/comment/commentList2'),
+        meta: { title: '评论审核', icon: 'el-icon-s-comment' }
+      },
+      {
+        path: 'commentList',
+        name: '评论列表',
+        component: () => import('@/views/comment/commentList'),
+        meta: { title: '评论列表', icon: 'el-icon-s-comment' }
+      }
+    ]
+  },
 
 
   {
     path: '/order',
     component: Layout,
+    name: '订单管理',
+    meta: { title: '订单管理', icon: 'el-icon-s-marketing' },
     children: [
+      {
+        path: 'waitOrders',
+        name: '等待支付',
+        component: () => import('@/views/comment/orders2'),
+        meta: { title: '等待支付', icon: 'el-icon-s-comment' }
+      },
       {
         path: 'orders',
         name: '订单列表',

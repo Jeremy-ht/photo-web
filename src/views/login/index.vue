@@ -107,7 +107,7 @@
       },
       // 去首页
       goHome() {
-        this.$router.push({ path: `/phone/home` })
+        this.$router.push({ path: `/home` })
       },
 
     }

@@ -6,7 +6,7 @@
            p-id="3317" width="200" height="200">
         <path
           d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
-          fill="#FF8040" opacity=".939" p-id="3318"></path>
+          fill="#5a98de" opacity=".939" p-id="3318"></path>
       </svg>
     </div>
 
@@ -16,8 +16,7 @@
 
         <div class="person-show-left">
           <div class="name">
-            <!--          <img class="avatar" :src="UserInfo.image" alt="">-->
-            <img class="avatar" src="http://service.szhtkj.com.cn/SzhtShop/uploads/default/avatar/userimg.png" alt="">
+            <img class="avatar" :src="UserInfo.image" alt="">
             <div class="username">{{UserInfo.uname}}</div>
           </div>
 
@@ -236,7 +235,7 @@
         // 是否登录
         if (!this.loginIs()) {
           this.$message({message: '请先登录', type: 'error', duration: 1700})
-          this.$router.push('/phone/login')
+          this.$router.push('/pass/login')
           return false
         }
 
@@ -268,13 +267,13 @@
 
       // 去首页
       goHome() {
-        this.$router.push({path: `/phone/home`})
+        this.$router.push({path: `/home`})
       },
 
       // 购物车
       goShopping() {
         // 后台请求购物车数据
-        const {href} = this.$router.resolve({path: '/phone/shopping'})
+        const {href} = this.$router.resolve({path: '/shopping'})
         window.open(href, '_blank')
       },
 
@@ -291,7 +290,7 @@
       // 退出登录
       layoutGo() {
         window.localStorage.removeItem('UserInfoPhone')
-        this.$router.push({path: '/phone/home'})
+        this.$router.push({path: '/home'})
 
       },
 
@@ -311,7 +310,7 @@
               newPassword: ''
             }
             window.localStorage.removeItem('UserInfoPhone')
-            this.$router.push({path: '/phone/login'})
+            this.$router.push({path: '/pass/login'})
 
           } else {
             this.$message({message: res.message, type: 'error', duration: 1700})

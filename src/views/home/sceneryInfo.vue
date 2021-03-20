@@ -7,7 +7,7 @@
            p-id="3317" width="200" height="200">
         <path
           d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
-          fill="#FF8040" opacity=".939" p-id="3318"></path>
+          fill="#5a98de" opacity=".939" p-id="3318"></path>
       </svg>
     </div>
 
@@ -62,6 +62,54 @@
       </div>
     </div>
 
+
+    <div style="width: 100%;height: 100%;background-color: #ededed;padding-top: 30px">
+      <div class="person-show">
+
+        <!-- ========================= -->
+        <!-- 评论 -->
+        <!-- ========================= -->
+        <div class="container-item-three">
+          <div class="comment">
+            <div class="comment-title">
+              <div style="font-size: 24px;color: #FF7124">
+                评论列表 <span style="font-size: 18px;color: #575757">{{'(' + countList + ' 条)'}} </span>
+              </div>
+            </div>
+
+            <div class="comment-content">
+              <div class="comment-content-item" v-for="item in commentList">
+                <div class="comment-content-item-left">
+                  <img class="login-img"
+                       :src="item.image"/>
+                </div>
+
+                <div class="comment-content-item-right">
+                  <div class="comment-content-name">
+                    {{item.uname}}
+                  </div>
+
+                  <div class="comment-content-content">
+                    {{item.commentary}}
+                  </div>
+
+                  <div class="comment-content-time">
+                    {{item.creatime}}
+                  </div>
+                </div>
+              </div>
+              <div class="comment-content-bottom" v-show="countList == 0">
+                <span>我是有底线的</span>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <div style="width: 100%;height: 70px;background-color: #ededed;">
     </div>
 
@@ -72,7 +120,7 @@
 
 
       <div class="addressss">
-        <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 500px;text-align: center">
+        <el-select v-model="addressid" placeholder="选择地址" clearable style="width: 300px;">
           <el-option v-for="item in addressList"
                      :label="item.categoryname + ' ( ' + item.creator + ' ) '"
                      :value="item.id"
@@ -81,7 +129,7 @@
       </div>
 
       <div style="margin-top: 20px;">
-        <el-date-picker
+        <el-date-picker style="width: 300px;"
           v-model="phototime"
           type="date"
           placeholder="选择拍摄日期" >
@@ -93,7 +141,7 @@
           type="textarea"
           :rows="2"
           placeholder="请写下您的留言"
-          v-model="note" tyle="width: 500px;text-align: center;margin-top: 20px;">
+          v-model="note" tyle="width: 500px;margin-top: 20px;">
         </el-input>
       </div>
 
@@ -175,6 +223,8 @@
         note: '',
         phototime: '',
         ids: [],
+
+
       }
     },
     created() {
@@ -198,14 +248,15 @@
         })
 
 
-        // // 评论
-        // await getCommentList(1, 100, this.detailId).then(res => {
-        //   if (res.success) {
-        //     this.commentList = res.data.data
-        //     this.countList = res.data.data.length
-        //   }
-        //
-        // })
+        // 评论
+        await getCommentList(1, 100, this.detailId).then(res => {
+          console.log(res.data.data)
+          if (res.success) {
+            this.commentList = res.data.data
+            this.countList = res.data.data.length
+          }
+
+        })
 
       },
 
@@ -225,7 +276,7 @@
       go() {
         // 是否登录
         if (!this.loginIs()) {
-          const {href} = this.$router.resolve({path: '/phone/login'})
+          const {href} = this.$router.resolve({path: '/pass/login'})
           window.open(href, '_blank')
         } else {
 
@@ -292,7 +343,7 @@
           return false
         }
 
-        const {href} = this.$router.resolve({path: '/phone/shopping'})
+        const {href} = this.$router.resolve({path: '/shopping'})
         window.open(href, '_blank')
       },
 
@@ -305,7 +356,7 @@
       },
 
       goHome() {
-        this.$router.push({path: `/phone/home`})
+        this.$router.push({path: `/home`})
       },
 
       addCart(id) {
@@ -369,7 +420,7 @@
       },
       // 去详情页
       goDetailInfo(id) {
-        const {href} = this.$router.resolve({path: `/phone/show/${id}`})
+        const {href} = this.$router.resolve({path: `/show/${id}`})
         window.open(href, '_blank')
 
       },
@@ -861,7 +912,146 @@
   .addressss {
     /*display: flex;*/
     /*flex-wrap: wrap;*/
+    /*text-align: center;*/
+  }
+
+  container-item-three {
+    width: 100%;
+    height: 100%;
+    /*margin-top: 20px;*/
+    /*border: 1px solid #e9e9e9;*/
+    /*display: flex;*/
+  }
+
+  .comment1 {
+    margin: 0 14%;
+    padding-bottom: 50px;
+  }
+
+  /*.comment-content-img {*/
+  /*  display: flex;*/
+  /*  width: 200px;*/
+  /*  height: 40px;*/
+  /*}*/
+
+  /*.comment-content-img-span{*/
+  /*line-height: 40px;*/
+  /*  margin: auto;*/
+  /*  !*margin-left: 4px;*!*/
+  /*  font-size: 12px;*/
+  /*}*/
+
+  .comment-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /*.comment-content {*/
+  /*  margin-top: 20px;*/
+  /*  border-bottom: solid .1px #bd2c00;*/
+  /*}*/
+
+
+  .comment {
+    padding: 10px;
+  }
+
+  .comment-number {
+    width: 20%;
+    height: 50px;
+    /*border: 1px red solid;*/
+    font-size: 20px;
+    color: #55a532;
+  }
+
+  .comment-content {
+    width: 100%;
+    height: 100%;
+    border-top: solid 1px #FF7124;
+    margin-top: 20px;
+  }
+
+  .comment-content-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    /*border-bottom: solid 1px #c5bfbf;*/
+  }
+
+  .comment-content-item-left {
+    width: 100px;
+    height: 100%;
+    /*border: solid 1px #FF7124;*/
+    display: flex;
+  }
+
+  .comment-content-item-right {
+    width: calc(100% - 100px);
+    height: 100%;
+    /*border: solid 1px #FF7124;*/
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .comment-content-bottom {
+    font: 14px PingFangSC-Regular;
     text-align: center;
+    line-height: 42px;
+    color: #626675;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 1200px;
+  }
+
+  .comment-content-name {
+    /*margin-bottom: 10px;*/
+    /*font-family: PingFangSC-Semibold;*/
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+  }
+
+  .comment-content-content {
+    padding-top: 10px;
+    font: 14px/22px PingFangSC-Regular;
+    text-align: justify;
+    color: #222;
+  }
+
+  .comment-content-time {
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #9195a3;
+    padding-top: 20px;
+  }
+
+  .login-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .container-item-two {
+    margin: 10px;
+    padding-bottom: 60px;
+  }
+
+  /deep/ .el-tabs__item.is-active {
+    color: #ff9d00;
+  }
+
+  /deep/ .el-tabs__item.is-active {
+    color: #ff9d00;
+  }
+
+  /deep/ .el-tabs__item:hover {
+    color: #ff9d00;
+    cursor: pointer;
   }
 
 </style>

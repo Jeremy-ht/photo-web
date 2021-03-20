@@ -11,7 +11,7 @@
                p-id="3317" width="200" height="200">
             <path
               d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
-              fill="#FF8040" opacity=".939" p-id="3318"></path>
+              fill="#5a98de" opacity=".939" p-id="3318"></path>
           </svg>
         </div>
 
@@ -112,6 +112,14 @@
                 </div>
 
 
+                <div v-if="otherList.length != 0"
+                     style="width: 1200px;height: 60px;background-color: #5aa9de;margin-top: 20px">
+                  <!--分页-->
+                  <page-barr :pageTotal="pageTotal" :pageNum="pagenum" :pageSize="pagesize"
+                             @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"/>
+
+                </div>
+
               </div>
 
 
@@ -174,6 +182,7 @@
 <script>
   import {getShoppingNum, getSceneryList, getSearchContent} from '../../api/common'
   import '../../assets/iconfont/iconfont'
+  import PageBarr from "@/components/PageBar2";
 
   export default {
     name: 'index',
@@ -220,10 +229,20 @@
         fourList: [],
         searchList: [],
 
+        // 分页查询
+        pagenum: 1,
+        pagesize: 9,
+        pageTotal: 0,
+
+
       }
     },
     created() {
       this.init()
+
+    },
+    components: {
+      PageBarr
 
     },
     methods: {
@@ -257,13 +276,14 @@
         this.showIndex = '2'
 
         let params = {
-          pagenum: 1,
-          pagesize: 100
+          pagenum: this.pagenum,
+          pagesize: this.pagesize
         }
 
         getSceneryList(params).then(res => {
           if (res.success) {
             this.otherList = res.data.data
+            this.pageTotal = res.data.pageTotal
           } else {
             this.$message({
               message: '数据获取失败,请刷新!',
@@ -285,6 +305,15 @@
           return true
         }
 
+      },
+
+      handleSizeChange(pagesize) {
+        this.pagesize = pagesize
+        this.init()
+      },
+      handleCurrentChange(pagenum) {
+        this.pagenum = pagenum
+        this.init()
       },
 
 
@@ -324,7 +353,7 @@
 
       // 登录
       goLogin() {
-        this.$router.push({path: `/phone/login`})
+        this.$router.push({path: `/pass/login`})
       },
 
       // 个人中心
@@ -342,17 +371,17 @@
       goShopping() {
         // 是否登录
         if (!this.loginIs()) {
-          this.$message({ message: '请先登录', type: 'error', duration: 1700 })
+          this.$message({message: '请先登录', type: 'error', duration: 1700})
           return false
         }
 
-        const {href} = this.$router.resolve({path: '/phone/shopping'})
+        const {href} = this.$router.resolve({path: '/shopping'})
         window.open(href, '_blank')
       },
 
       // 去详情页
       goDetailInfo(id) {
-        const {href} = this.$router.resolve({path: `/phone/show/${id}`})
+        const {href} = this.$router.resolve({path: `/show/${id}`})
         window.open(href, '_blank')
 
       },
@@ -611,7 +640,7 @@
     width: 1200px;
     height: 100%;
     margin: 18px auto 0 auto;
-    background-color: #f3f3f3;
+    background-color: #f6f6f6;
   }
 
   /* ======= */
@@ -789,34 +818,36 @@
 
 
   .title-item {
-    height: 320px;
+    height: 420px;
     padding: 20px;
-    width: 270px;
-    margin-top: 10px;
-    margin-left: 7px;
-    margin-right: 18px;
+    width: 360px;
+    margin-top: 18px;
+    margin-left: 18px;
+    margin-right: 12px;
     background-color: white;
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    border-radius: 6px;
 
   }
 
   .title-item:hover {
-    box-shadow: 8px 8px 5px #e1e1e1;
+    box-shadow: 2px 2px 2px 2px #e1e1e1;
+    border: solid 1px #5a98de;
   }
 
   .phone-img {
-    width: 190px;
-    height: 210px;
+    width: 260px;
+    height: 290px;
     margin: 0 auto;
   }
 
 
-  .phone-img:hover {
-    width: 220px;
-    height: 250px;
-  }
+  /*.phone-img:hover {*/
+  /*  width: 220px;*/
+  /*  height: 250px;*/
+  /*}*/
 
   .phone-title {
     color: #333;
@@ -826,7 +857,7 @@
   }
 
   .phone-feature {
-    font-size: 12px;
+    font-size: 16px;
     color: #b0b0b0;
     margin-top: 12px;
     text-align: center;
@@ -836,7 +867,7 @@
   }
 
   .phone-feature:hover {
-    font-size: 16px;
+    font-size: 18px;
     color: #ff6b25;
   }
 

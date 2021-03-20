@@ -21,28 +21,13 @@
       </el-form-item>
 
       <el-form-item label="封面图">
-        <!--        <el-upload class="avatar-uploader"-->
-        <!--                   action="/upload/headImage"-->
-        <!--                   :show-file-list="false"-->
-        <!--                   :on-success="handleAvatarSuccess">-->
-        <!--          <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">-->
-        <!--          <i v-else class="el-icon-plus avatar-uploader-icon"/>-->
-        <!--        </el-upload>-->
-
-        <el-upload
-          class="avatar-uploader"
-          action=""
-          :drag="true"
-          :show-file-list="false"
-          :multiple="true"
-          :http-request="uploadHttp"
-          :before-upload="beforeAvatarUpload"
-          :on-success="handleAvatarSuccess"
-          list-type="picture">
-
-          <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"/>
-        </el-upload>
+                <el-upload class="avatar-uploader"
+                           action="http://8.136.218.79:8080/upload/updataFile"
+                           :show-file-list="false"
+                           :on-success="handleAvatarSuccess">
+                  <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
+                  <i v-else class="el-icon-plus avatar-uploader-icon"/>
+                </el-upload>
       </el-form-item>
 
 
@@ -86,24 +71,13 @@
         // 表单验证
         rules: {
           name: [
-            {required: true, message: '请鲜花名称', trigger: 'blur'},
+            {required: true, message: '请填写套餐名称', trigger: 'blur'},
             {min: 1, max: 50, message: '长度在 1 到 150 个字符', trigger: 'blur'}
           ],
-          content: [
-            {required: true, message: '请填写鲜花详情', trigger: 'blur'},
+          price: [
+            {required: true, message: '请填写价格', trigger: 'blur'},
             {min: 1, max: 30000, message: '长度在 1 到 3000 个字符', trigger: 'blur'}
           ],
-          description: [
-            {required: true, message: '请输入鲜花花语', trigger: 'blur'},
-            {min: 1, max: 200, message: '长度在 1 到 200 个字符', trigger: 'blur'}
-          ],
-          origin: [
-            {required: true, message: '请选择选择产地', trigger: 'change'}
-          ],
-          categoryid: [
-            {required: true, message: '请选择鲜花分类', trigger: 'change'}
-          ]
-
         },
 
         // tinymce初始化配置
@@ -176,12 +150,12 @@
       // 校验
       checkForm() {
         if (this.addDetail.name == '') {
-          this.$message({message: '产品标题不能为空', type: 'error', duration: 1700})
+          this.$message({message: '标题不能为空', type: 'error', duration: 1700})
           return false
         }
 
         if (this.addDetail.content == '') {
-          this.$message({message: '产品详情不能为空', type: 'error', duration: 1700})
+          this.$message({message: '详情不能为空', type: 'error', duration: 1700})
           return false
         }
 
@@ -264,8 +238,7 @@
       // 封面上传成功
       handleAvatarSuccess(res, file) {
         if (res.success) {
-          console.log(res)
-          // this.addDetail.icon = res.data.location
+          this.addDetail.icon = res.data.location
         } else {
           this.$message({message: '封面上传失败，请重新上传', type: 'error', duration: 1700})
         }
@@ -292,17 +265,17 @@
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
-    width: 160px;
-    height: 160px;
-    line-height: 160px;
+    width: 260px;
+    height: 290px;
+    line-height: 290px;
     text-align: center;
     border: 1.4px #d9d9d9 dashed;
   }
 
 
   .avatar {
-    width: 160px;
-    height: 160px;
+    width: 260px;
+    height: 290px;
     margin: 4px auto;
     display: block;
     border-radius: 2.5%;
@@ -318,8 +291,8 @@
   /deep/ .avatar-uploader-icon {
     font-size: 28px;
     /*width: 220px;*/
-    height: 160px;
-    line-height: 160px;
+    width: 260px;
+    height: 290px;
     color: #5a98de;
     text-align: center;
     border: 2px #5a98de dashed;
