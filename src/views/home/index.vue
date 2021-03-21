@@ -231,7 +231,7 @@
 
         // 分页查询
         pagenum: 1,
-        pagesize: 9,
+        pagesize: 6,
         pageTotal: 0,
 
 

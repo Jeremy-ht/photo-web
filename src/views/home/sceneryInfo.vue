@@ -323,11 +323,11 @@
 
         addOrder2(order).then(res => {
           if (res.success) {
-            this.$message({message: '提交成功', type: 'success', duration: 2000})
+            this.$message({message: '恭喜你,预约成功', type: 'success', duration: 2000})
             this.init()
             this.showOrder = false
           } else {
-            this.$message({message: '提交失败，请刷新再试', type: 'error', duration: 2000})
+            this.$message({message: '预约失败,请刷新再试', type: 'error', duration: 2000})
 
           }
         })
@@ -406,7 +406,7 @@
             this.init()
             this.dilog = false
             this.addComment = ''
-            this.$message({message: '评论成功', type: 'success', duration: 1700})
+            this.$message({message: '评论成功,等待审核通过后显示', type: 'success', duration: 1700})
           } else {
             this.$message({message: '评论失败', type: 'error', duration: 1700})
           }

@@ -251,7 +251,7 @@
         }
         addComment(addCommentInfo).then(res => {
           if (res.success) {
-            this.$message({message: '评论成功', type: 'success', duration: 1700})
+            this.$message({message: '评论成功,等待审核通过后显示', type: 'success', duration: 1700})
             this.showComment = false
             this.init()
           } else {

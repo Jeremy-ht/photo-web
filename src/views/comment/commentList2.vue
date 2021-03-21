@@ -15,14 +15,14 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" align="center" width="240px">
           <template slot-scope="scope">
             <!--显示-->
-            <el-button type="success" icon="el-icon-delete"
+            <el-button type="success" icon="el-icon-delete" size="mini"
                        @click="disableCommonBtn(scope.row.id, 1)">审核通过
             </el-button>
 
-            <el-button type="danger" icon="el-icon-delete"
+            <el-button type="danger" icon="el-icon-delete" size="mini"
                        @click="disableCommonBtn(scope.row.id, 2)">审核拒绝
             </el-button>
 

@@ -5,14 +5,14 @@
 
 
       <div class="item-one">
-        <div id="main1" style="width: 600px;height: 480px;">
+        <div id="main1" style="width: 480px;height: 460px;">
 
         </div>
       </div>
 
 
       <div class="item-two">
-        <div id="main" style="width:600px;height: 480px;">
+        <div id="main" style="width:480px;height: 460px;">
 
         </div>
       </div>
@@ -53,7 +53,7 @@
         // 绘制图表
         myChart.setOption({
           title: {
-            text: '2021年度月总销售订单',
+            text: '2021年度月总销售订单数量',
             left: 'center',
             textStyle: {
               color: '#FF8040'
@@ -87,7 +87,7 @@
         myChart1.setOption({
           title: {
             text: '2021年度各门店销售额',
-            left: 'center',
+            left: 'right',
 
             textStyle: {
               color: '#FF8040'
@@ -139,19 +139,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
   }
 
   .item-one {
-    background-color: #f3f3f3;
+    background-color: #f5f5f5;
     border-radius: 6px;
-    margin-top: 30px;
+    margin-top:20px;
     padding: 20px 0;
   }
 
   .item-two {
-    background-color: #f3f3f3;
+    background-color: #f5f5f5;
     border-radius: 6px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 40px;
     padding: 20px 0;
 
