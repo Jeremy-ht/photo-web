@@ -1,82 +1,86 @@
 <template>
   <div class="home-container">
+    <div v-show="show">
 
-    <div class="container-item-hr">
-      <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1"
-           xmlns="http://www.w3.org/2000/svg"
-           p-id="3317" width="200" height="200">
-        <path
-          d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
-          fill="#5a98de" opacity=".939" p-id="3318"></path>
-      </svg>
-    </div>
 
-    <div style="display: flex;background-color: #ededed;">
-      <div class="shopping-1">
+      <div class="container-item-hr">
+        <svg @click="goHome()" t="1614784884047" class="icon" viewBox="0 0 1354 1024" version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="3317" width="200" height="200">
+          <path
+            d="M1271.741935 163.509677H1028.954839C951.329032 163.509677 919.948387 1.651613 839.019355 1.651613H487.225806c-54.503226 0-80.929032 161.858065-161.858064 161.858064H80.929032C36.335484 163.509677 0 199.845161 0 244.43871v698.632258C0 987.664516 36.335484 1024 80.929032 1024h1189.161291c44.593548 0 80.929032-36.335484 80.929032-80.929032V244.43871c1.651613-44.593548-34.683871-80.929032-79.27742-80.929033zM677.16129 888.567742c-180.025806 0-325.367742-143.690323-325.367742-322.064516S497.135484 244.43871 677.16129 244.43871s325.367742 143.690323 325.367742 322.064516c-1.651613 178.374194-146.993548 322.064516-325.367742 322.064516z m391.432258-564.851613c-23.122581 0-41.290323-18.167742-41.290322-39.63871 0-23.122581 18.167742-39.63871 41.290322-39.638709s41.290323 18.167742 41.290323 39.638709c0 21.470968-18.167742 39.63871-41.290323 39.63871zM270.864516 82.580645c0-14.864516-11.56129-26.425806-26.425806-26.425806H163.509677c-14.864516 0-26.425806 11.56129-26.425806 26.425806v26.425807h135.432258c-1.651613 0-1.651613-11.56129-1.651613-26.425807zM677.16129 323.716129c-133.780645 0-242.787097 109.006452-242.787096 242.787097S541.729032 809.290323 677.16129 809.290323s242.787097-109.006452 242.787097-242.787097S810.941935 323.716129 677.16129 323.716129z"
+            fill="#5a98de" opacity=".939" p-id="3318"></path>
+        </svg>
+      </div>
 
-        <div class="title">
-          <h3 style="margin-left: 20px;font-weight: 400;">订单中心</h3>
+      <div style="display: flex;background-color: #ededed;">
+        <div class="shopping-1">
 
-          <div class="cart-table-title">
-            <div class="name">商品信息</div>
-            <div class="price1">单价</div>
-            <div class="num">拍摄时间</div>
-            <!--            <div class="subtotal">小计</div>-->
-            <div class="operation">操作</div>
-          </div>
+          <div class="title">
+            <h3 style="margin-left: 20px;font-weight: 400;">订单中心</h3>
 
-          <div class="shopping-items">
+            <div class="cart-table-title">
+              <div class="name">商品信息</div>
+              <div class="price1">单价</div>
+              <div class="num">拍摄时间</div>
+              <!--            <div class="subtotal">小计</div>-->
+              <div class="operation">操作</div>
+            </div>
 
-            <div v-if="showList" class="shopping-item" v-for="item in cartList" :index="item.id">
+            <div class="shopping-items">
 
-              <div style="width: 640px;display: flex">
+              <div v-if="showList" class="shopping-item" v-for="item in cartList" :index="item.id">
 
-                <img @click="goDetailInfo(item.photoid)" :src="item.icon">
+                <div style="width: 640px;display: flex">
 
-                <div class="name" @click="goDetailInfo(item.photoid)">
-                  {{item.name}} {{ '(' + item.categoryname + '}'}}
+                  <img @click="goDetailInfo(item.photoid)" :src="item.icon">
+
+                  <div class="name" @click="goDetailInfo(item.photoid)">
+                    {{item.name}} {{ '(' + item.categoryname + '}'}}
+                  </div>
+                </div>
+
+
+                <div class="price">
+                  ￥ {{item.price}}
+                </div>
+
+                <div class="count">
+                  <i class="el-icon-time"/>{{' ' +item.phototime.substring(0,10)}}
+                </div>
+
+
+                <div class="delete">
+
+                  <el-link v-if="item.state == '' ||item.state == 0 || item.state == null ||item.state == undefined "
+                           @click="commentG(item.photoid, item.type, item.orderid)" type="danger"
+                           style="margin-right: 12px">评论
+                  </el-link>
+                  <el-link v-if="item.state == 1" type="primary" style="margin-right: 12px">已评论</el-link>
+
+
+                  <el-link v-if="item.type == 1" @click="goPay(item.orderid, item.name,item.price )" type="danger">去支付
+                  </el-link>
+
+                  <el-link v-else type="primary">已支付</el-link>
                 </div>
               </div>
 
-
-              <div class="price">
-                ￥ {{item.price}}
-              </div>
-
-              <div class="count">
-                <i class="el-icon-time"/>{{' ' +item.phototime.substring(0,10)}}
-              </div>
-
-
-              <div class="delete">
-
-                <el-link v-if="item.state == '' ||item.state == 0 || item.state == null ||item.state == undefined "
-                         @click="commentG(item.photoid, item.type, item.orderid)" type="danger" style="margin-right: 12px">评论
-                </el-link>
-                <el-link v-if="item.state == 1" type="primary" style="margin-right: 12px">已评论</el-link>
-
-
-                <el-link v-if="item.type == 1" @click="goPay(item.orderid)" type="danger">去支付</el-link>
-
-                <el-link v-else type="primary">已支付</el-link>
-              </div>
             </div>
 
-          </div>
-
-          <div v-if="!showList" style="color: #555555;text-align: center;
+            <div v-if="!showList" style="color: #555555;text-align: center;
           margin-top: 100px;margin-bottom: 100px">
-            订单为空
-          </div>
+              订单为空
+            </div>
 
+
+          </div>
 
         </div>
-
       </div>
-    </div>
 
 
-    <el-dialog title="评论" :visible.sync="showComment" width="40%" @close="closeAddAdminForm()">
+      <el-dialog title="评论" :visible.sync="showComment" width="40%" @close="closeAddAdminForm()">
       <span>
         <!--表单-->
         <el-form>
@@ -91,19 +95,24 @@
         </el-form>
       </span>
 
-      <!--底部区域-->
-      <span slot="footer" class="dialog-footer">
+        <!--底部区域-->
+        <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="addComment" size="mini">确 定</el-button>
         <el-button @click="showComment = false" size="mini">取 消</el-button>
       </span>
-    </el-dialog>
+      </el-dialog>
+    </div>
 
+
+    <div id="aaa" v-show="!show">
+
+    </div>
   </div>
 </template>
 
 <script>
   import {
-    delCart, getCartList, addComment, updOrder, getSceneryList, addOrder, disableComment
+    delCart, getCartList, addComment, updOrder, getSceneryList, addOrder, confirm
   } from '../../api/common'
   import '../../assets/iconfont/iconfont'
 
@@ -116,7 +125,7 @@
         search: '',
         showLogin: false,
         showComment: false,
-
+        show: true,
         UserInfo: {
           uname: '',
           image: '',
@@ -268,23 +277,33 @@
       },
 
       // 去支付
-      goPay(id) {
+      goPay(id, name, price) {
         // this.$router.push({path: `/home`})
         this.$confirm(`确定支付吗?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          name = '拍照平台（' + name.substring(0, 10) + ') 套餐'
 
-          // this.$message({message: '支付成功', type: 'success', duration: 1700})
+          confirm(name, price).then(res => {
+            this.show = !this.show
+
+            const divForm = document.getElementById('aaa')
+            if (divForm.length) {
+              document.body.removeChild(divForm[0])
+            }
+            const div = document.createElement('div')
+            div.innerHTML = res // data就是接口返回的form 表单字符串
+            document.body.appendChild(div)
+            document.forms[0].setAttribute('target', '_blank') // 新开窗口跳转
+            document.forms[0].submit()
+
+          })
+
 
           updOrder(id).then(res => {
-            if (res.success) {
-              this.init()
-              this.$message({message: '支付成功', type: 'success', duration: 1700})
-            } else {
-              this.$message({message: '失败，请刷新', type: 'error', duration: 1700})
-            }
+            this.init()
           })
         })
 

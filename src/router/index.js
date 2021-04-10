@@ -41,6 +41,14 @@ export const constantRoutes = [
     meta: { title: 'BLUE 拍照平台' }
   },
 
+  // {
+  //   path: '/homes',
+  //   hidden: true,
+  //   name: 'BLUE 拍照平台',
+  //   component: () => import('@/views/home/index2'),
+  //   meta: { title: 'BLUE 拍照平台' }
+  // },
+
   {
     path:  '/shopping',
     hidden: true,
