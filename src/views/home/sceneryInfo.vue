@@ -27,8 +27,69 @@
               class="info-price-number">{{detailInfo.price + '.00'}}</span></span>
             </div>
           </div>
-          <div style="font-size: 14px;color: #555555;margin-top: 30px">
-            拍摄所需时长: <span>{{detailInfo.time + ' 小时'}}</span>
+          <!--          <div style="font-size: 14px;color: #555555;margin-top: 30px">-->
+          <!--            拍摄所需时长: <span>{{detailInfo.time + ' 小时'}}</span>-->
+          <!--          </div>-->
+
+          <div style="width: 500px;height: 200px;display: flex;flex-wrap: wrap">
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-user"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">服装</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.fz + '套'}}</div>
+              </div>
+            </div>
+
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-picture-outline"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">拍摄</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.ps + '张'}}</div>
+              </div>
+            </div>
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-magic-stick"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">精修</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.jx + '张'}}</div>
+              </div>
+            </div>
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-notebook-2"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">相册</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.xc + '个'}}</div>
+              </div>
+            </div>
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-notebook-1"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">相框</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.xk + '个'}}</div>
+              </div>
+            </div>
+
+
+            <div style="width: 150px;height: 80px;display: flex">
+              <div style="width:50px;height:80px;font-size: 38px;margin: auto 0 auto 20px"><i
+                style="line-height: 80px;color: #585858" class="el-icon-crop"></i></div>
+              <div style="margin: auto 0;display: flex;flex-direction: column">
+                <div style="color: #848484;font-size: 18px">底片</div>
+                <div style="color: black;font-weight:600;font-size: 18px;margin-top: 4px">{{detailInfo.dp}}</div>
+              </div>
+            </div>
+
+
           </div>
 
           <div class="info-btns">
@@ -54,7 +115,57 @@
             <span>详情</span>
           </div>
 
-          <div v-html="detailInfo.content" style="background: white" class="content">
+          <div style="background: white;padding: 20px 40px">
+
+
+            <div style="margin-bottom: 50px">
+              <h2>拍摄&成品</h2>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">拍摄张数
+                <span style="margin-left: 16px;color: black">{{detailInfo.ps}}张</span>
+              </div>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">精修张数
+                <span style="margin-left: 16px;color: black">{{detailInfo.jx}}张</span>
+              </div>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">底片赠送
+                <span style="margin-left: 16px;color: black">{{detailInfo.dp}}</span>
+              </div>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">服装套数
+                <span style="margin-left: 16px;color: black">{{detailInfo.fz}}套</span>
+              </div>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">相册个数
+                <span style="margin-left: 16px;color: black">{{detailInfo.xc}}个</span>
+              </div>
+
+              <div style="margin-left: 40px;color: #7D7D7D;margin-bottom: 10px;font-size: 18px">相框个数
+                <span style="margin-left: 16px;color: black">{{detailInfo.xk}}个</span>
+              </div>
+
+
+            </div>
+
+
+            <div style="margin-bottom: 50px">
+              <h2>拍摄场景</h2>
+
+              <div style="margin-left: 40px;font-size: 18px">{{detailInfo.cj}}</div>
+            </div>
+
+            <div style="margin-bottom: 50px">
+              <h2>拍摄风格</h2>
+
+              <div style="margin-left: 40px;font-size: 18px">{{detailInfo.fg}}</div>
+            </div>
+
+            <div style="margin-bottom: 50px">
+              <h2>套餐描述</h2>
+
+              <div style="margin-left: 40px;font-size: 16px;">{{detailInfo.js}}</div>
+            </div>
 
           </div>
         </div>
@@ -62,6 +173,21 @@
       </div>
     </div>
 
+    <div style="width: 100%;height: 100%;background-color: #ededed;">
+      <div class="person-show">
+
+        <div class="person-show-right">
+          <div class="person-show-right-div">
+            <span>图片展示</span>
+          </div>
+
+          <div v-html="detailInfo.content" style="background: white" class="content">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
 
     <div style="width: 100%;height: 100%;background-color: #ededed;padding-top: 30px">
       <div class="person-show">
@@ -130,9 +256,9 @@
 
       <div style="margin-top: 20px;">
         <el-date-picker style="width: 300px;"
-          v-model="phototime"
-          type="date"
-          placeholder="选择拍摄日期" >
+                        v-model="phototime"
+                        type="date"
+                        placeholder="选择拍摄日期">
         </el-date-picker>
       </div>
 
@@ -523,7 +649,7 @@
   }
 
   .info-btns {
-    margin-top: 180px;
+    margin-top: 10px;
     font-size: 14px;
     height: 42px;
   }

@@ -20,14 +20,57 @@
         小时
       </el-form-item>
 
+      <el-form-item label="服装">
+        <el-input v-model="addDetail.fz" show-word-limit class="base-width-30"/>
+        套
+      </el-form-item>
+
+      <el-form-item label="拍摄张数">
+        <el-input v-model="addDetail.ps" show-word-limit class="base-width-30"/>
+        张
+      </el-form-item>
+
+
+      <el-form-item label="精修张数">
+        <el-input v-model="addDetail.jx" show-word-limit class="base-width-30"/>
+        张
+      </el-form-item>
+
+      <el-form-item label="底片">
+        <el-input v-model="addDetail.dp" show-word-limit class="base-width-30"/>
+
+      </el-form-item>
+
+      <el-form-item label="相册">
+        <el-input v-model="addDetail.xc" show-word-limit class="base-width-30"/>
+        个
+      </el-form-item>
+
+      <el-form-item label="相框">
+        <el-input v-model="addDetail.xk" show-word-limit class="base-width-30"/>
+        个
+      </el-form-item>
+
+      <el-form-item label="拍摄风格">
+        <el-input v-model="addDetail.fg" show-word-limit class="base-width-30"/>
+      </el-form-item>
+
+      <el-form-item label="拍摄场景">
+        <el-input v-model="addDetail.cj" show-word-limit class="base-width-30"/>
+      </el-form-item>
+
+      <el-form-item label="描述">
+        <el-input v-model="addDetail.js" type="textarea" show-word-limit class="base-width-50"/>
+      </el-form-item>
+
       <el-form-item label="封面图">
-                <el-upload class="avatar-uploader"
-                           action="http://8.136.218.79:8080/upload/updataFile"
-                           :show-file-list="false"
-                           :on-success="handleAvatarSuccess">
-                  <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"/>
-                </el-upload>
+        <el-upload class="avatar-uploader"
+                   action="http://8.136.218.79:8080/upload/updataFile"
+                   :show-file-list="false"
+                   :on-success="handleAvatarSuccess">
+          <img v-if="addDetail.icon !== ''" :src="addDetail.icon" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"/>
+        </el-upload>
       </el-form-item>
 
 
@@ -56,7 +99,8 @@
     content: '',
     icon: '',
     price: '',
-    time: ''
+    time: '',
+    fz: '', ps: '', jx: '', dp: '', xc: '', xk: '', fg: '', cj: '', js: ''
   }
 
   export default {
@@ -170,10 +214,56 @@
           return false
         }
 
-        // if (this.addDetail.image == '') {
-        //   this.$message({message: '添加产品缩略图', type: 'error', duration: 1700})
-        //   return false
-        // }
+        if (this.addDetail.fz == '') {
+          this.$message({message: '服装不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.ps == '') {
+          this.$message({message: '拍摄张数不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.jx == '') {
+          this.$message({message: '精修张数不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.dp == '') {
+          this.$message({message: '底片不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.xc == '') {
+          this.$message({message: '相册不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.xk == '') {
+          this.$message({message: '相框不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.fg == '') {
+          this.$message({message: '拍摄风格不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.cj == '') {
+          this.$message({message: '拍摄场景不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+        if (this.addDetail.js == '') {
+          this.$message({message: '描述不能为空', type: 'error', duration: 1700})
+          return false
+        }
+
+
+        if (this.addDetail.icon == '') {
+          this.$message({message: '添加封面图', type: 'error', duration: 1700})
+          return false
+        }
         return true
       },
 
@@ -207,10 +297,7 @@
 
       // oss 上传文件
       uploadHttp({file}) {
-        let client = {
-
-        }
-
+        let client = {}
 
 
         const {imgName} = 'ALIOSS_IMG_';

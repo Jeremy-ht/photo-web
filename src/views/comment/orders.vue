@@ -98,14 +98,16 @@
         }
         getOrderList(params).then(res => {
           if (res.success) {
-            // this.pageTotal = res.data.pageTotal
-            // this.orderList = res.data.data
+            this.pageTotal = res.data.pageTotal
+            this.orderList = res.data.data
 
-            this.orderList = res.data.data.filter(
-              item => item.type === 2
-            )
-
-            this.pageTotal = this.orderList.length
+            // this.orderList = res.data.data.filter(
+            //   item => item.type === 2
+            // )
+            //
+            // console.log(this.orderList)
+            // console.log(this.orderList.length)
+            // this.pageTotal = this.orderList.length
 
           }
         })
