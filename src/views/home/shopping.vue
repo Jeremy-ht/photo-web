@@ -289,6 +289,10 @@
           confirm(name, price).then(res => {
             this.show = !this.show
 
+            updOrder(id).then(res => {
+              this.init()
+            })
+
             const divForm = document.getElementById('aaa')
             if (divForm.length) {
               document.body.removeChild(divForm[0])
@@ -301,10 +305,6 @@
 
           })
 
-
-          updOrder(id).then(res => {
-            this.init()
-          })
         })
 
       },

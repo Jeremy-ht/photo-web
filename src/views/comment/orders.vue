@@ -2,6 +2,14 @@
   <div class="app-container">
     <el-card class="box-card" shadow="hover">
 
+
+      <el-input placeholder="请输入内容" v-model="input2" style="width: 300px;float: right;margin-bottom: 20px">
+        <template slot="append">
+          <el-button @click="search" slot="append" icon="el-icon-search" type="warning">搜索</el-button>
+        </template>
+      </el-input>
+
+
       <!--表格-->
       <el-table :data="orderList" stripe style="width: 100%; margin-top: 10px" border size="small">
         <el-table-column label="#" type="index" align="center"/>
@@ -76,7 +84,8 @@
         pageTotal: 0,
 
         orderList: [],
-        categoryList: []
+        categoryList: [],
+        input2: '',
 
       }
     },
@@ -94,24 +103,26 @@
 
         let params = {
           pagenum: this.pagenum,
-          pagesize: this.pagesize
+          pagesize: this.pagesize,
+          text: this.input2
         }
         getOrderList(params).then(res => {
           if (res.success) {
             this.pageTotal = res.data.pageTotal
             this.orderList = res.data.data
 
-            // this.orderList = res.data.data.filter(
-            //   item => item.type === 2
-            // )
-            //
-            // console.log(this.orderList)
-            // console.log(this.orderList.length)
-            // this.pageTotal = this.orderList.length
-
           }
         })
 
+      },
+
+      search() {
+        if (this.input2 == '') {
+          this.$message({message: '请输入需要搜索的门店', type: 'error', duration: 2000})
+          return
+        }
+
+        this.getCommonList()
       },
 
       // 分页
@@ -130,4 +141,11 @@
 
 <style scoped>
 
+  /deep/ .el-input-group__append button.el-button, .el-input-group__append div.el-select .el-input__inner, .el-input-group__append div.el-select:hover .el-input__inner, .el-input-group__prepend button.el-button, .el-input-group__prepend div.el-select .el-input__inner, .el-input-group__prepend div.el-select:hover .el-input__inner {
+    border-color: transparent;
+    background-color: rgb(255, 128, 64);
+    color: white;
+    border-top: 0;
+    border-bottom: 0;
+  }
 </style>
